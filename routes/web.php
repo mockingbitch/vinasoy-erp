@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,7 +12,16 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// AUTHENTICATION 
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/register', [AuthController::class, 'registerView'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
 
-Route::get('/', function () {
-    return view('welcome');
+// ADMIN
+Route::middleware(['checklogin'])->group(function() {
+    Route::prefix('admin')->group(function() {
+        Route::get('/', [AdminController::class, 'index'])->name('admin.home');
+    });
 });

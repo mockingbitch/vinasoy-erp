@@ -27,21 +27,27 @@ class AuthController extends Controller
 
         $token = Auth::attempt($credentials);
         if (!$token) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Unauthorized',
-            ], 401);
+            return view('auth.login')->with('msg', 'Sai tài khoản hoặc mật khẩu!!!');
         }
 
         $user = Auth::user();
-        return response()->json([
-                'status' => 'success',
-                'user' => $user,
-                'authorisation' => [
-                    'token' => $token,
-                    'type' => 'bearer',
-                ]
-            ]);
+
+        switch ($user->role) {
+            case 'ADMIN':
+            case 'MANAGER':
+            case 'EMPLOYEE':
+                return redirect()->route('admin.home');
+                break;
+            case 'WEARHOUSESTAFF':
+                return redirect()->route('warehouse.home');
+                break;
+            case 'USER':
+                return redirect()->route('home');
+                break;
+            default:
+                return redirect()->route('home');
+                break;
+        }
 
     }
 
