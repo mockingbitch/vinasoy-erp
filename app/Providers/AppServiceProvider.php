@@ -15,7 +15,9 @@ class AppServiceProvider extends ServiceProvider
     {
         $models = [
             'User',
-            'NhanVien'
+            'NhanVien',
+            'ChucVu',
+            'PhongBan'
         ];
 
         foreach ($models as $model) {
