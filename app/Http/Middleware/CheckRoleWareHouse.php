@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CheckRoleWareHouse
 {
@@ -16,6 +17,12 @@ class CheckRoleWareHouse
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        $user = Auth::guard('user')->user();
+        
+        if ($user && $user->role == 'ADMIN' || $user->role == 'MANAGER' || $user->role == 'WAREHOUSESTAFF') {
+            return $next($request);
+        } else {
+            return redirect()->back();
+        }
     }
 }

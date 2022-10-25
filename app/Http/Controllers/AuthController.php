@@ -14,7 +14,15 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','register']]);
+    }
+
+    public function index()
+    {
+        if (Auth::guard('user')->user()) {
+            return redirect()->back();
+        }
+        
+        return view('auth.login');
     }
 
     public function login(Request $request)
@@ -25,7 +33,7 @@ class AuthController extends Controller
         ]);
         $credentials = $request->only('email', 'password');
 
-        $token = Auth::attempt($credentials);
+        $token = Auth::guard('user')->attempt($credentials);
         if (!$token) {
             return view('auth.login')->with('msg', 'Sai tài khoản hoặc mật khẩu!!!');
         }
@@ -48,7 +56,6 @@ class AuthController extends Controller
                 return redirect()->route('home');
                 break;
         }
-
     }
 
     public function register(Request $request){
@@ -79,10 +86,8 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Successfully logged out',
-        ]);
+
+        return redirect()->route('login');
     }
 
     public function me()

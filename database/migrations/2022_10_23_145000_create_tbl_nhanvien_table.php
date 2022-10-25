@@ -25,10 +25,10 @@ return new class extends Migration
             $table->string('cccd')->nullable();
             $table->string('hocVan')->nullable();
             $table->string('ngoaiNgu')->nullable();
-            $table->unsignedBigInteger('chucVu_id');
-            $table->foreign('chucVu_id')->references('id')->on('tbl_chucvu');
-            $table->unsignedBigInteger('maPhong_id');
-            $table->foreign('maPhong_id')->references('id')->on('tbl_phongban');
+            $table->unsignedBigInteger('chucvu_id');
+            $table->foreign('chucvu_id')->references('id')->on('tbl_chucvu');
+            $table->unsignedBigInteger('maphong_id');
+            $table->foreign('maphong_id')->references('id')->on('tbl_phongban');
             $table->string('stk')->nullable();
             $table->string('nganHang')->nullable();
             $table->timestamps();
