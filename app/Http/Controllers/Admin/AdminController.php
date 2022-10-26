@@ -26,9 +26,9 @@ class AdminController extends Controller
     /**
      * @return Factory\View
      */
-    public function getNhanVienView() : View
+    public function getCreateNhanVienView() : View
     {
-        return view('admin.nhanvien', [
+        return view('admin.nhanvien.create', [
             'breadcrumb' => 'nhanvien'
         ]);
     }

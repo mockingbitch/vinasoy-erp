@@ -34,8 +34,12 @@ Route::middleware(['checklogin'])->group(function() {
             Route::get('/', [AdminController::class, 'index'])->name('admin.home');
             
             // Quan ly nhan vien
-            Route::get('/nhanvien', [AdminController::class, 'getNhanVienView'])->name('admin.nhanvien');
-            Route::post('/nhanvien', [NhanVienController::class, 'createStaff']);
+            Route::get('/nhanvien', [NhanVienController::class, 'list'])->name('admin.nhanvien.list');
+            Route::get('/nhanvien/new', [AdminController::class, 'getCreateNhanVienView'])->name('admin.nhanvien.create');
+            Route::post('/nhanvien/new', [NhanVienController::class, 'createNhanVien']);
+            Route::get('/nhanvien/{id}', [NhanVienController::class, 'getUpdateNhanVienView'])->name('admin.nhanvien.update');
+            Route::post('/nhanvien/{id}', [NhanVienController::class, 'updateNhanVien']);
+            Route::get('/nhanvien/delete/query', [NhanVienController::class, 'deleteNhanVien'])->name('admin.nhanvien.delete');
 
             // Quan ly phong ban
             Route::get('/phongban', [PhongBanController::class, 'list'])->name('admin.phongban.list');
