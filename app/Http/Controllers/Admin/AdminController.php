@@ -18,7 +18,8 @@ class AdminController extends Controller
         $user = Auth::user();
 
         return view('admin.home', [
-            'user' => $user
+            'user' => $user,
+            'breadcrumb' => 'adminhome'
         ]);
     }
 
@@ -27,22 +28,29 @@ class AdminController extends Controller
      */
     public function getNhanVienView() : View
     {
-        return view('admin.nhanvien');
+        return view('admin.nhanvien', [
+            'breadcrumb' => 'nhanvien'
+        ]);
     }
 
     /**
      * @return Factory\View
      */
-    public function getPhongBanView() : View
+    public function getCreatePhongBanView() : View
     {
-        return view('admin.phongban');
+        return view('admin.phongban.create', [
+            'breadcrumb' => 'phongban'
+        ]);
     }
 
     /**
      * @return Factory\View
      */
-    public function getChucVuView() : View
+    public function getCreateChucVuView() : View
     {
-        return view('admin.chucvu');
+
+        return view('admin.chucvu.create', [
+            'breadcrumb' => 'chucvu'
+        ]);
     }
 }

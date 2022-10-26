@@ -27,34 +27,37 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-        ]);
-        $credentials = $request->only('email', 'password');
-
-        $token = Auth::guard('user')->attempt($credentials);
-        if (!$token) {
-            return view('auth.login')->with('msg', 'Sai tài khoản hoặc mật khẩu!!!');
-        }
-
-        $user = Auth::user();
-
-        switch ($user->role) {
-            case 'ADMIN':
-            case 'MANAGER':
-            case 'EMPLOYEE':
-                return redirect()->route('admin.home');
-                break;
-            case 'WEARHOUSESTAFF':
-                return redirect()->route('warehouse.home');
-                break;
-            case 'USER':
-                return redirect()->route('home');
-                break;
-            default:
-                return redirect()->route('home');
-                break;
+        try {
+            $request->validate([
+                'email' => 'required|string|email',
+                'password' => 'required|string',
+            ]);
+            $credentials = $request->only('email', 'password');
+    
+            $token = Auth::guard('user')->attempt($credentials);
+            if (!$token) {
+                return view('auth.login')->with('msg', 'Sai tài khoản hoặc mật khẩu!!!');
+            }
+            $user = Auth::guard('user')->user();
+    
+            switch ($user->role) {
+                case 'ADMIN':
+                case 'MANAGER':
+                case 'EMPLOYEE':
+                    return redirect()->route('admin.home');
+                    break;
+                case 'WEARHOUSESTAFF':
+                    return redirect()->route('warehouse.home');
+                    break;
+                case 'USER':
+                    return redirect()->route('home');
+                    break;
+                default:
+                    return redirect()->route('home');
+                    break;
+            }
+        } catch (\Throwable $th) {
+            return redirect()->route('404');
         }
     }
 

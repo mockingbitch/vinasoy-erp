@@ -24,6 +24,7 @@ Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'registerView'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
+Route::get('/404', [HomeController::class, 'pageNotFound'])->name('404');
 
 Route::middleware(['checklogin'])->group(function() {
 
@@ -37,10 +38,20 @@ Route::middleware(['checklogin'])->group(function() {
             Route::post('/nhanvien', [NhanVienController::class, 'createStaff']);
 
             // Quan ly phong ban
-            Route::get('/phongban', [AdminController::class, 'getPhongBanView'])->name('admin.phongban');
+            Route::get('/phongban', [PhongBanController::class, 'list'])->name('admin.phongban.list');
+            Route::get('/phongban/new', [AdminController::class, 'getCreatePhongBanView'])->name('admin.phongban.create');
+            Route::post('/phongban/new', [PhongBanController::class, 'createPhongBan']);
+            Route::get('/phongban/{id}', [PhongBanController::class, 'getUpdatePhongBanView'])->name('admin.phongban.update');
+            Route::post('/phongban/{id}', [PhongBanController::class, 'updatePhongBan']);
+            Route::get('/phongban/delete/query', [PhongBanController::class, 'deletePhongBan'])->name('admin.phongban.delete');
 
             // Quan ly chuc vu
-            Route::get('/chucvu', [AdminController::class, 'getChucVuView'])->name('admin.chucvu');
+            Route::get('/chucvu', [ChucVuController::class, 'list'])->name('admin.chucvu.list');
+            Route::get('/chucvu/new', [AdminController::class, 'getCreateChucVuView'])->name('admin.chucvu.create');
+            Route::post('/chucvu/new', [ChucVuController::class, 'createChucVu']);
+            Route::get('/chucvu/{id}', [ChucVuController::class, 'getUpdateChucVuView'])->name('admin.chucvu.update');
+            Route::post('/chucvu/{id}', [ChucVuController::class, 'updateChucVu']);
+            Route::get('/chucvu/delete/query', [ChucVuController::class, 'deleteChucVu'])->name('admin.chucvu.delete');
         });
     });
 

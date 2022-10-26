@@ -20,6 +20,8 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="{{asset('dashboard/assets/css/soft-ui-dashboard.css?v=1.0.6')}}" rel="stylesheet" />
   <link href="{{asset('dashboard/assets/css/custom.css')}}" rel="stylesheet" />
+  <script src="{{asset('dashboard/assets/js/swal.js')}}"></script>
+  <script src="{{asset('dashboard/assets/js/jquery.js')}}"crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -35,7 +37,7 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link  active" href="{{route('admin.home')}}">
+          <a class="nav-link {{$breadcrumb == 'adminhome' ? 'active' : ''}}" href="{{route('admin.home')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <!-- <title>shop </title> -->
@@ -55,7 +57,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="{{route('admin.nhanvien')}}">
+          <a class="nav-link {{$breadcrumb == 'nhanvien' ? 'active' : ''}}" href="{{route('admin.nhanvien')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>office</title>
@@ -75,7 +77,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="{{route('admin.phongban')}}">
+          <a class="nav-link {{$breadcrumb == 'phongban' ? 'active' : ''}}" href="{{route('admin.phongban.list')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 {{-- <title>credit-card</title> --}}
@@ -95,7 +97,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link  " href="{{route('admin.chucvu')}}">
+          <a class="nav-link {{$breadcrumb == 'chucvu' ? 'active' : ''}}" href="{{route('admin.chucvu.list')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 {{-- <title>box-3d-50</title> --}}
