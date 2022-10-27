@@ -111,7 +111,7 @@
         <div class="col-6">
             <div class="form-group mt-4">
                 <label for="inputRole">Vai trò @if ($errors->has('role'))<p class="text-error">*{{$errors->first('role')}}</p>@endif</label>
-                <select name="role" style="width:20%;height:50px;margin-left:17px " class="select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <select name="role" style="width:20%; height:50px; margin-left:17px " class="select form-select-lg mb-3" aria-label=".form-select-lg example">
                     <option value="0">Admin</option>
                     <option value="1">Manager</option>
                     <option value="2">Staff</option>

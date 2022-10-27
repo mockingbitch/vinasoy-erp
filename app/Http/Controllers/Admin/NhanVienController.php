@@ -12,6 +12,8 @@ use App\Constants\Constant;
 use App\Constants\UserConstant;
 use App\Http\Requests\NhanVienRequest;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class NhanVienController extends Controller
 {
@@ -84,7 +86,7 @@ class NhanVienController extends Controller
      */
     public function createNhanVien(NhanVienRequest $request)
     {
-        // try {
+        try {
             if (! $user = auth()->guard('user')->user()) {
                 return redirect()->route('login');
             }
@@ -92,23 +94,34 @@ class NhanVienController extends Controller
             $data = $request->toArray();
             $data['user_id'] = $user->id;
 
-            if (! $this->nhanVienRepository->create($data) || ! $this->createUser($data)) {
-                // return view('admin.nhanvien.create', [
-                //     'message' => Constant::MSG['error'],
-                //     'data' => $request->toArray()
-                // ]);
-                return $this->getCreateNhanVienView(Constant::MSG['error']);
+            // DB::beginTransaction();
+            // try {
+            //     if (! $this->nhanVienRepository->create($data) || ! $this->createUser($data)) {
+            //         return $this->getCreateNhanVienView(Constant::MSG['error']);
+            //     }
+            //     DB::commit();
+            // } catch (Exception $e) {
+            //     DB::rollBack();
+                
+            //     return redirect()->route('404');
+            // }
+            if ($this->createUser($data) == true) {
+                if (! $this->nhanVienRepository->create($data)) {
+                    return $this->getCreateNhanVienView(Constant::MSG['error']);
+                }
+
+                return redirect()
+                    ->route('admin.nhanvien.list')
+                    ->with([
+                        'nhanVienErrCode' => Constant::ERR_CODE['created'],
+                        'nhanVienMessage' => Constant::MSG['created']
+                    ]);
             }
 
-            return redirect()
-                ->route('admin.nhanvien.list')
-                ->with([
-                    'nhanVienErrCode' => Constant::ERR_CODE['created'],
-                    'nhanVienMessage' => Constant::MSG['created']
-                ]);
-        // } catch (\Throwable $th) {
-        //     return redirect()->route('404');
-        // }
+            return $this->getCreateNhanVienView(Constant::MSG['error']);
+        } catch (\Throwable $th) {
+            return redirect()->route('404');
+        }
     }
 
     /**
@@ -206,6 +219,7 @@ class NhanVienController extends Controller
         }
 
         $user = auth()->guard('user')->user();
+        $roleCompare = $data['role'];
 
         switch($user->role) {
             case Constant::ROLE['admin']: $role = UserConstant::USER_ROLE_VALUE['admin']; break;
@@ -216,7 +230,16 @@ class NhanVienController extends Controller
             default: $role = 100; break;
         }
 
-        if ($role < (int) $data['role']) {
+        switch($data['role']) {
+            case UserConstant::USER_ROLE_VALUE['admin']: $data['role'] = Constant::ROLE['admin']; break;
+            case UserConstant::USER_ROLE_VALUE['manager']: $data['role'] = Constant::ROLE['manager']; break;
+            case UserConstant::USER_ROLE_VALUE['staff']: $data['role'] = Constant::ROLE['staff']; break;
+            case UserConstant::USER_ROLE_VALUE['warehousestaff']: $data['role'] = Constant::ROLE['warehousestaff']; break;
+            case UserConstant::USER_ROLE_VALUE['user']: $data['role'] = Constant::ROLE['user']; break;
+            default: $data['role'] = Constant::ROLE['user']; break;
+        }
+
+        if ($role < (int) $roleCompare) {
             $data['name'] = $data['hoTen'];
             $data['password'] = Hash::make($data['password']);
             if (! $this->userRepository->create($data)) {

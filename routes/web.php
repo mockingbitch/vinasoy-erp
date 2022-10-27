@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\ChucVuController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/register', [AuthController::class, 'registerView'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/404', [HomeController::class, 'pageNotFound'])->name('404');

@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('tbl_chucvu', function (Blueprint $table) {
             $table->id();
             $table->string('tenChucVu')->nullable();
-            $table->string('trangThai')->nullable();
+            $table->string('trangThai')->default(1);
             $table->string('ghiChu')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

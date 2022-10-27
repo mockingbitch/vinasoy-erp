@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('stk')->nullable();
             $table->string('nganHang')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('trangThai')->default(1);
             $table->string('ghiChu')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

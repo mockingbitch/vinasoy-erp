@@ -21,8 +21,11 @@ return new class extends Migration
             $table->string('soQuyetDinh')->nullable();
             $table->string('ngayQuyetDinh')->nullable();
             $table->string('lyDo')->nullable();
+            $table->string('mucPhat')->nullable();
+            $table->string('mucThuong')->nullable();
             $table->string('nguoiKy')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

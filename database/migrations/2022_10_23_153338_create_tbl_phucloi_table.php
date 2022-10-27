@@ -20,11 +20,10 @@ return new class extends Migration
             $table->string('baoHiem')->nullable();
             $table->string('thuongTet')->nullable();
             $table->string('troCap')->nullable();
-            $table->unsignedBigInteger('klkt_id');
-            $table->foreign('klkt_id')->references('id')->on('tbl_kyluatkhenthuong');
             $table->string('moTa')->nullable();
             $table->string('ngayTao')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

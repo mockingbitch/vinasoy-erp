@@ -17,15 +17,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('nhanVien_id');
             $table->foreign('nhanvien_id')->references('id')->on('tbl_nhanvien');
-            $table->unsignedBigInteger('phongban_id');
-            $table->foreign('phongban_id')->references('id')->on('tbl_phongban');
-            $table->unsignedBigInteger('chucvu_id');
-            $table->foreign('chucvu_id')->references('id')->on('tbl_chucvu');
-            $table->unsignedBigInteger('phucloi_id');
-            $table->foreign('phucloi_id')->references('id')->on('tbl_phucloi');
+            $table->string('thang');
             $table->string('tienLuong')->default(0);
             $table->string('trangThai')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

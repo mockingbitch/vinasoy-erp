@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ChucVu;
 use App\Models\PhongBan;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class NhanVien extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     /**
      * @var string
