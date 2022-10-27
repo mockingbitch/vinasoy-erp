@@ -35,7 +35,7 @@ Route::middleware(['checklogin'])->group(function() {
             
             // Quan ly nhan vien
             Route::get('/nhanvien', [NhanVienController::class, 'list'])->name('admin.nhanvien.list');
-            Route::get('/nhanvien/new', [AdminController::class, 'getCreateNhanVienView'])->name('admin.nhanvien.create');
+            Route::get('/nhanvien/new', [NhanVienController::class, 'getCreateNhanVienView'])->name('admin.nhanvien.create');
             Route::post('/nhanvien/new', [NhanVienController::class, 'createNhanVien']);
             Route::get('/nhanvien/{id}', [NhanVienController::class, 'getUpdateNhanVienView'])->name('admin.nhanvien.update');
             Route::post('/nhanvien/{id}', [NhanVienController::class, 'updateNhanVien']);

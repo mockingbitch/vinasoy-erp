@@ -1,6 +1,6 @@
 @extends('dashboardLayout')
 @section('content')
-<h2>Quản lý chức vụ</h2>
+<h2>Thêm mới chức vụ</h2>
 <div class="card mb-4">
     <form class="mx-4 pt-4" method="post" enctype="multipart/form-data">
      @csrf

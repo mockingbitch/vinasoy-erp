@@ -12,4 +12,16 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         return User::class;
     }
+
+    /**
+     * @param string $email
+     * 
+     * @return boolean
+     */
+    public function checkExistedEmail(string $email) : bool
+    {
+        $user = $this->model->where('email', $email)->first();
+
+        return $user ? true : false;
+    }
 }

@@ -106,7 +106,7 @@ class ChucVuController extends Controller
 
     public function updateChucVu($id, Request $request)
     {
-        // try {
+        try {
             if (! $this->chucVuRepository->update((int) $id, $request->toArray())) {
                 return view('admin.chucvu.update', [
                     'message' => Constant::MSG['error'],
@@ -120,8 +120,8 @@ class ChucVuController extends Controller
                     'chucVuErrCode' => Constant::ERR_CODE['updated'],
                     'chucVuMessage' => Constant::MSG['updated']
                 ]);
-        // } catch (\Throwable $th) {
-        //     return redirect()->route('404');
-        // }
+        } catch (\Throwable $th) {
+            return redirect()->route('404');
+        }
     }
 }

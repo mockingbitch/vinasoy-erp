@@ -106,7 +106,7 @@ class PhongBanController extends Controller
 
     public function updatePhongBan($id, Request $request)
     {
-        // try {
+        try {
             if (! $this->phongBanRepository->update((int) $id, $request->toArray())) {
                 return view('admin.phongban.update', [
                     'message' => Constant::MSG['error'],
@@ -120,8 +120,8 @@ class PhongBanController extends Controller
                     'phongBanErrCode' => Constant::ERR_CODE['updated'],
                     'phongBanMessage' => Constant::MSG['updated']
                 ]);
-        // } catch (\Throwable $th) {
-        //     return redirect()->route('404');
-        // }
+        } catch (\Throwable $th) {
+            return redirect()->route('404');
+        }
     }
 }

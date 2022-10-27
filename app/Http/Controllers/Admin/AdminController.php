@@ -23,15 +23,7 @@ class AdminController extends Controller
         ]);
     }
 
-    /**
-     * @return Factory\View
-     */
-    public function getCreateNhanVienView() : View
-    {
-        return view('admin.nhanvien.create', [
-            'breadcrumb' => 'nhanvien'
-        ]);
-    }
+    
 
     /**
      * @return Factory\View
