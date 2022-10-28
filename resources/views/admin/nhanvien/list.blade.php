@@ -16,7 +16,6 @@
                 <th><b>Ngày sinh</b></th>
                 <th><b>Chức vụ</b></th>
                 <th><b>Mã phòng</b></th>
-                <th><b>Sửa</b></th>
                 <th><b>Xoá</b></th>
             </tr>
             </thead>
@@ -25,15 +24,18 @@
             <tr class="tb-row" onclick="handleClickRow({{$nhanVien->id}})">
                 <td>{{$nhanVien->id}}</td>
                 <td>{{$nhanVien->hoTen}}</td>
-                <td>{{$nhanVien->gioiTinh}}</td>
+                <td>
+                    @if ($nhanVien->gioiTinh == 0)
+                        Nam
+                    @elseif ($nhanVien->gioiTinh == 1)
+                        Nữ
+                    @else
+                        Khác
+                    @endif
+                </td>
                 <td>{{$nhanVien->ngaySinh}}</td>
                 <td>{{$nhanVien->phongBan->tenPhong}}</td>
                 <td>{{$nhanVien->chucVu->tenChucVu}}</td>
-                <td align="left">
-                    <a class="btn btn-success" href="{{route('admin.nhanvien.update', ['id' => $nhanVien->id])}}">
-                        <i class="fas fa-edit"></i>
-                    </a>
-                </td>
                 <td align="left">
                     <a class="btn btn-danger"
                         onclick="confirmDelete({{$nhanVien->id}})">
