@@ -33,12 +33,12 @@ class ChucVuController extends Controller
     public function createChucVu(ChucVuRequest $request)
     {
         try {
-            if (! $this->chucVuRepository->create($request->toArray())) {
+            if (! $this->chucVuRepository->create($request->toArray())) :
                 return view('admin.chucvu.create', [
                     'message' => Constant::MSG['error'],
                     'data' => $request->toArray()
                 ]);
-            }
+            endif;
 
             return redirect()
                 ->route('admin.chucvu.list')
@@ -91,9 +91,9 @@ class ChucVuController extends Controller
         try {
             $chucVu = $this->chucVuRepository->find((int) $id);
 
-            if (! $chucVu || null == $chucVu) {
+            if (! $chucVu || null == $chucVu) :
                 return redirect()->route('admin.chucvu.list');
-            }
+            endif;
 
             return view('admin.chucvu.update', [
                 'chucVu' => $chucVu,
@@ -107,12 +107,12 @@ class ChucVuController extends Controller
     public function updateChucVu($id, Request $request)
     {
         try {
-            if (! $this->chucVuRepository->update((int) $id, $request->toArray())) {
+            if (! $this->chucVuRepository->update((int) $id, $request->toArray())) :
                 return view('admin.chucvu.update', [
                     'message' => Constant::MSG['error'],
                     'data' => $request->toArray()
                 ]);
-            }
+            endif;
 
             return redirect()
                 ->route('admin.chucvu.list')

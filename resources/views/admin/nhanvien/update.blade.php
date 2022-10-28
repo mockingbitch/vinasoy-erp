@@ -1,6 +1,9 @@
 @extends('dashboardLayout')
 @section('content')
-<h2>Sửa đổi thông tin nhân viên</h2>
+<div>
+    <h2>Sửa đổi thông tin nhân viên</h2>
+    <a href="{{route('admin.hopdong', ['id' => $nhanVien->id])}}"><input type="text" style="display: flex" class="btn btn-primary" value="Hợp đồng" disabled></a>
+</div>
 <div class="card mb-4">
     <form class="mx-4 pt-4" method="post" enctype="multipart/form-data">
      @csrf

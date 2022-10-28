@@ -45,7 +45,7 @@
 </div>
 <script>
     function handleClickRow(id) {
-        console.log(id);
+        // window.location.assign('/nhanvien/detail/' + id);
     }
 
     function confirmDelete(id) {

@@ -13,7 +13,7 @@ class HopDongLaoDong extends Model
     /**
      * @var string
      */
-    protected $table = 'tbl_phongban';
+    protected $table = 'tbl_hopdonglaodong';
 
     /**
      * @var array
@@ -24,6 +24,11 @@ class HopDongLaoDong extends Model
         'ngayBatDau',
         'ngayKetThuc',
         'diaDiemLamViec',
-        'ngachluong_id'
+        'ngachLuong',
+        'bacLuong',
+        'heSoLuong',
+        'phuCap',
+        'nguoiKy',
+        'ngayKy'
     ];
 }

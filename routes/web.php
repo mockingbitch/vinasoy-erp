@@ -8,6 +8,8 @@ use App\Http\Controllers\Warehouse\WarehouseController;
 use App\Http\Controllers\Admin\NhanVienController;
 use App\Http\Controllers\Admin\PhongBanController;
 use App\Http\Controllers\Admin\ChucVuController;
+use App\Http\Controllers\Admin\HopDongLaoDongController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,6 +59,10 @@ Route::middleware(['checklogin'])->group(function() {
             Route::get('/chucvu/{id}', [ChucVuController::class, 'getUpdateChucVuView'])->name('admin.chucvu.update');
             Route::post('/chucvu/{id}', [ChucVuController::class, 'updateChucVu']);
             Route::get('/chucvu/delete/query', [ChucVuController::class, 'deleteChucVu'])->name('admin.chucvu.delete');
+
+            // Quan ly hop dong 
+            Route::get('/hopdong/{id}', [HopDongLaoDongController::class, 'getHopDongView'])->name('admin.hopdong');
+            Route::post('/hopdong/{id}', [HopDongLaoDongController::class, 'createOrUpdateHopDong']);
         });
     });
 

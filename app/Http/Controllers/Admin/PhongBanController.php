@@ -32,13 +32,13 @@ class PhongBanController extends Controller
      */
     public function createPhongBan(Request $request)
     {
-        // try {
-            if (! $this->phongBanRepository->create($request->toArray())) {
+        try {
+            if (! $this->phongBanRepository->create($request->toArray())) :
                 return view('admin.phongban.create', [
                     'message' => Constant::MSG['error'],
                     'data' => $request->toArray()
                 ]);
-            }
+            endif;
 
             return redirect()
                 ->route('admin.phongban.list')
@@ -46,9 +46,9 @@ class PhongBanController extends Controller
                     'phongBanErrCode' => Constant::ERR_CODE['created'],
                     'phongBanMessage' => Constant::MSG['created']
                 ]);
-        // } catch (\Throwable $th) {
-        //     return redirect()->route('404');
-        // }
+        } catch (\Throwable $th) {
+            return redirect()->route('404');
+        }
     }
 
     /**
@@ -91,9 +91,9 @@ class PhongBanController extends Controller
         try {
             $phongBan = $this->phongBanRepository->find((int) $id);
 
-            if (! $phongBan || null == $phongBan) {
+            if (! $phongBan || null == $phongBan) :
                 return redirect()->route('admin.phongban.list');
-            }
+            endif;
 
             return view('admin.phongban.update', [
                 'phongBan' => $phongBan,
@@ -107,12 +107,12 @@ class PhongBanController extends Controller
     public function updatePhongBan($id, Request $request)
     {
         try {
-            if (! $this->phongBanRepository->update((int) $id, $request->toArray())) {
+            if (! $this->phongBanRepository->update((int) $id, $request->toArray())) :
                 return view('admin.phongban.update', [
                     'message' => Constant::MSG['error'],
                     'data' => $request->toArray()
                 ]);
-            }
+            endif;
 
             return redirect()
                 ->route('admin.phongban.list')

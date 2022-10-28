@@ -11,6 +11,7 @@ use App\Repositories\Contracts\Interface\UserRepositoryInterface;
 use App\Constants\Constant;
 use App\Constants\UserConstant;
 use App\Http\Requests\NhanVienRequest;
+use App\Http\Requests\NhanVienUpdateRequest;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -87,9 +88,9 @@ class NhanVienController extends Controller
     public function createNhanVien(NhanVienRequest $request)
     {
         try {
-            if (! $user = auth()->guard('user')->user()) {
+            if (! $user = auth()->guard('user')->user()) :
                 return redirect()->route('login');
-            }
+            endif;
 
             $data = $request->toArray();
             $data['user_id'] = $user->id;
@@ -105,10 +106,10 @@ class NhanVienController extends Controller
                 
             //     return redirect()->route('404');
             // }
-            if ($this->createUser($data) == true) {
-                if (! $this->nhanVienRepository->create($data)) {
+            if ($this->createUser($data) == true) :
+                if (! $this->nhanVienRepository->create($data)) :
                     return $this->getCreateNhanVienView(Constant::MSG['error']);
-                }
+                endif;
 
                 return redirect()
                     ->route('admin.nhanvien.list')
@@ -116,7 +117,7 @@ class NhanVienController extends Controller
                         'nhanVienErrCode' => Constant::ERR_CODE['created'],
                         'nhanVienMessage' => Constant::MSG['created']
                     ]);
-            }
+            endif;
 
             return $this->getCreateNhanVienView(Constant::MSG['error']);
         } catch (\Throwable $th) {
@@ -151,9 +152,9 @@ class NhanVienController extends Controller
         try {
             $nhanVien = $this->nhanVienRepository->find((int) $id);
 
-            if (! $nhanVien || null == $nhanVien) {
+            if (! $nhanVien || null == $nhanVien) :
                 return redirect()->back();
-            }
+            endif;
 
             $listChucVu = $this->chucVuRepository->getAll();
             $listPhongBan = $this->phongBanRepository->getAll();
@@ -171,30 +172,30 @@ class NhanVienController extends Controller
 
     /**
      * @param [type] $id
-     * @param NhanVienRequest $request
+     * @param NhanVienUpdateRequest $request
      * 
      * @return void
      */
-    public function updateNhanVien($id, NhanVienRequest $request)
+    public function updateNhanVien($id, NhanVienUpdateRequest $request)
     {
         try {
-            if (! $this->nhanVienRepository->find((int) $id)) {
+            if (! $this->nhanVienRepository->find((int) $id)) :
                 return redirect()->back();
-            }
+            endif;
 
-            if (! $user = auth()->guard('user')->user()) {
+            if (! $user = auth()->guard('user')->user()) :
                 return redirect()->route('login');
-            }
+            endif;
 
             $data = $request->toArray();
             $data['user_id'] = $user->id;
 
-            if (! $this->nhanVienRepository->update((int) $id, $data)) {
+            if (! $this->nhanVienRepository->update((int) $id, $data)) :
                 return view('admin.nhanvien.update', [
                     'message' => Constant::MSG['error'],
                     'data' => $request->toArray()
                 ]);
-            }
+            endif;
 
             return redirect()
                 ->route('admin.nhanvien.list')
@@ -214,9 +215,9 @@ class NhanVienController extends Controller
      */
     public function createUser($data = []) : bool
     {
-        if ($this->userRepository->checkExistedEmail($data['email'])) {
+        if ($this->userRepository->checkExistedEmail($data['email'])) :
             $this->getCreateNhanVienView($msg = 'Email đã tồn tại!');
-        }
+        endif;
 
         $user = auth()->guard('user')->user();
         $roleCompare = $data['role'];
@@ -239,15 +240,15 @@ class NhanVienController extends Controller
             default: $data['role'] = Constant::ROLE['user']; break;
         }
 
-        if ($role < (int) $roleCompare) {
+        if ($role < (int) $roleCompare) :
             $data['name'] = $data['hoTen'];
             $data['password'] = Hash::make($data['password']);
-            if (! $this->userRepository->create($data)) {
+            if (! $this->userRepository->create($data)) :
                 return false;
-            }
+            endif;
 
             return true;
-        }
+        endif;
 
         return false;
     }

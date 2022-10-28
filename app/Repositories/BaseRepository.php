@@ -63,10 +63,14 @@ abstract class BaseRepository implements BaseRepositoryInterface
         }
         return false;
     }
-    public function paginate($int){
+
+    public function paginate($int)
+    {
         return $this->model->paginate($int);
     }
-    public function count(){
+
+    public function count()
+    {
         return $this->model->count();
     }
 }

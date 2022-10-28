@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('tbl_luong', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('nhanVien_id');
+            $table->unsignedBigInteger('nhanvien_id');
             $table->foreign('nhanvien_id')->references('id')->on('tbl_nhanvien');
             $table->string('thang');
             $table->string('tienLuong')->default(0);

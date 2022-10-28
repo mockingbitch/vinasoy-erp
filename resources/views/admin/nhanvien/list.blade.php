@@ -49,7 +49,7 @@
 </div>
 <script>
     function handleClickRow(id) {
-        console.log(id);
+        window.location.assign('nhanvien/' + id);
     }
 
     function confirmDelete(id) {
