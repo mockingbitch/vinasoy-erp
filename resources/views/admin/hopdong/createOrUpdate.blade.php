@@ -36,7 +36,7 @@
     </div>
     <div class="form-group mt-4">
         <label for="inputPhuCap">Phụ cấp @if ($errors->has('phuCap'))<p class="text-error">*{{$errors->first('phuCap')}}</p>@endif</label>
-        <input type="text" name="phuCap" class="form-control" id="inputPhuCap" aria-describedby="nameHelp" value="{{$hdld->phuCap ?? ''}}" placeholder="{{number_format((int) $hdld->phuCap) ?? ''}}">
+        <input type="text" name="phuCap" class="form-control" id="inputPhuCap" aria-describedby="nameHelp" value="{{$hdld->phuCap ?? ''}}">
     </div>
     <div class="form-group mt-4">
         <label for="inputNguoiKy">Người ký @if ($errors->has('nguoiKy'))<p class="text-error">*{{$errors->first('nguoiKy')}}</p>@endif</label>

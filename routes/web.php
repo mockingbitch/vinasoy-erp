@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\NhanVienController;
 use App\Http\Controllers\Admin\PhongBanController;
 use App\Http\Controllers\Admin\ChucVuController;
 use App\Http\Controllers\Admin\HopDongLaoDongController;
+use App\Http\Controllers\Admin\LuongController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +64,9 @@ Route::middleware(['checklogin'])->group(function() {
             // Quan ly hop dong 
             Route::get('/hopdong/{id}', [HopDongLaoDongController::class, 'getHopDongView'])->name('admin.hopdong');
             Route::post('/hopdong/{id}', [HopDongLaoDongController::class, 'createOrUpdateHopDong']);
+
+            Route::get('/luong', [LuongController::class, 'getListView'])->name('admin.luong.list');
+            // Route::get('/luong/{id}', [LuongController::class, 'getChiTietView'])->name('admin.luong.list');
         });
     });
 

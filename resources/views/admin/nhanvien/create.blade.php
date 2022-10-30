@@ -93,7 +93,7 @@
         <div class="col-6">
             <div class="form-group">
                 <label for="inputEmail">Email @if ($errors->has('email'))<p class="text-error">*{{$errors->first('email')}}</p>@endif</label>
-                <input type="text" class="form-control" name="email" id="inputEmail" value="">
+                <input type="email" class="form-control" name="email" id="inputEmail" value="">
             </div>
         </div>
         <div class="col-6">
