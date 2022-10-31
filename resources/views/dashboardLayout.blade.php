@@ -1,3 +1,6 @@
+@php 
+  $user = Auth::guard('user')->user();
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,7 +59,7 @@
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" style="display: {{$user->role == 'ADMIN' || $user->role == 'MANAGER' ? 'block' : 'none'}}">
           <a class="nav-link {{$breadcrumb == 'nhanvien' ? 'active' : ''}}" href="{{route('admin.nhanvien.list')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -76,7 +79,7 @@
             <span class="nav-link-text ms-1">Quản lý nhân viên</span>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" style="display: {{$user->role == 'ADMIN' || $user->role == 'MANAGER' ? 'block' : 'none'}}">
           <a class="nav-link {{$breadcrumb == 'phongban' ? 'active' : ''}}" href="{{route('admin.phongban.list')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -96,7 +99,7 @@
             <span class="nav-link-text ms-1">Quản lý phòng ban</span>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" style="display: {{$user->role == 'ADMIN' || $user->role == 'MANAGER' ? 'block' : 'none'}}">
           <a class="nav-link {{$breadcrumb == 'chucvu' ? 'active' : ''}}" href="{{route('admin.chucvu.list')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -138,7 +141,7 @@
             <span class="nav-link-text ms-1">Thưởng phạt</span>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" style="display: {{$user->role == 'ADMIN' || $user->role == 'MANAGER' ? 'block' : 'none'}}">
           <a class="nav-link {{$breadcrumb == 'luong' ? 'active' : ''}}" href="{{route('admin.luong.list')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -251,7 +254,7 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">{{$breadcrumb}}</li>
           </ol>
           <h6 class="font-weight-bolder mb-0">Dashboard</h6>
         </nav>
@@ -269,7 +272,7 @@
             <li class="nav-item d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
                 <i class="fa fa-user me-sm-1"></i>
-                <span class="d-sm-inline d-none">{{Auth::guard('user')->user()->name}}</span>
+                <span class="d-sm-inline d-none">{{$user->name}}</span>
               </a>
             </li>
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">

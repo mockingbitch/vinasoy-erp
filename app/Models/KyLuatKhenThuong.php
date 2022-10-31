@@ -14,7 +14,7 @@ class KyLuatKhenThuong extends Model
     /**
      * @var string
      */
-    protected $table = 'tbl_chucvu';
+    protected $table = 'tbl_kyluatkhenthuong';
 
     /**
      * @var array

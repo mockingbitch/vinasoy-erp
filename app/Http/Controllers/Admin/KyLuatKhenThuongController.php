@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Contracts\Interface\KyLuatKhenThuongRepositoryInterface;
 use App\Repositories\Contracts\Interface\NhanVienRepositoryInterface;
+use App\Http\Requests\KyLuatKhenThuongRequest;
+use App\Constants\Constant;
 
 class KyLuatKhenThuongController extends Controller
 {
@@ -78,5 +80,60 @@ class KyLuatKhenThuongController extends Controller
             'listNhanVienSuggest' => response()->json($this->nhanVienRepository->getListSuggest(), JSON_UNESCAPED_UNICODE),
             'breadcrumb' => $this->breadcrumb
         ]);
+    }
+
+    public function create(KyLuatKhenThuongRequest $request)
+    {
+        try {
+            $this->checkRole();
+            $string = $request->tenNhanVien;
+            $arrStringName = explode('-', $string);
+
+            if (! $nhanVien = $this->nhanVienRepository->find((int) $arrStringName[0])) return redirect()->back();
+
+            $data = [
+                'nhanvien_id' => $nhanVien->id,
+                'hinhThuc' => $request->hinhThuc,
+                'soQuyetDinh' => $request->soQuyetDinh,
+                'ngayQuyetDinh' => $request->ngayQuyetDinh,
+                'lyDo' => $request->lyDo,
+                'mucPhat' => $request->mucPhat,
+                'mucThuong' => $request->mucThuong,
+                'nguoiKy' => $request->nguoiKy
+            ];
+
+            if (! $this->klktRepository->create($data)) return redirect()->back()->with('msg', 'Error creating');
+
+            return redirect()
+                ->route('admin.thuongphat.list')
+                ->with([
+                    'klktErrCode' => Constant::ERR_CODE['created'],
+                    'klktMessage' => Constant::MSG['created']
+                ]);
+        } catch (\Throwable $th) {
+            return redirect()->route('404');
+        }
+    }
+
+    /**
+     * @param Request $request
+     * 
+     * @return void
+     */
+    public function deleteKlkt(Request $request)
+    {
+        try {
+            $this->checkRole();
+            $this->klktRepository->delete((int) $request->query('id'));
+        } catch (\Throwable $th) {
+            return redirect()->route('404');
+        }
+    }
+
+    public function checkRole()
+    {
+        if (! $user = auth()->guard('user')->user()) return redirect()->route('404');
+
+        if ($user->role !== Constant::ROLE['admin'] || $user->role !== Constant::ROLE['manager']) return redirect()->route('404');
     }
 }

@@ -87,7 +87,7 @@ class NhanVienController extends Controller
      */
     public function createNhanVien(NhanVienRequest $request)
     {
-        try {
+        // try {
             if (! $user = auth()->guard('user')->user()) :
                 return redirect()->route('login');
             endif;
@@ -120,9 +120,9 @@ class NhanVienController extends Controller
             endif;
 
             return $this->getCreateNhanVienView(Constant::MSG['error']);
-        } catch (\Throwable $th) {
-            return redirect()->route('404');
-        }
+        // } catch (\Throwable $th) {
+        //     return redirect()->route('404');
+        // }
     }
 
     /**
@@ -225,7 +225,7 @@ class NhanVienController extends Controller
         switch($user->role) {
             case Constant::ROLE['admin']: $role = UserConstant::USER_ROLE_VALUE['admin']; break;
             case Constant::ROLE['manager']: $role = UserConstant::USER_ROLE_VALUE['manager']; break;
-            case Constant::ROLE['staff']: $role = UserConstant::USER_ROLE_VALUE['staff']; break;
+            case Constant::ROLE['employee']: $role = UserConstant::USER_ROLE_VALUE['employee']; break;
             case Constant::ROLE['warehousestaff']: $role = UserConstant::USER_ROLE_VALUE['warehousestaff']; break;
             case Constant::ROLE['user']: $role = UserConstant::USER_ROLE_VALUE['user']; break;
             default: $role = 100; break;
@@ -234,7 +234,7 @@ class NhanVienController extends Controller
         switch($data['role']) {
             case UserConstant::USER_ROLE_VALUE['admin']: $data['role'] = Constant::ROLE['admin']; break;
             case UserConstant::USER_ROLE_VALUE['manager']: $data['role'] = Constant::ROLE['manager']; break;
-            case UserConstant::USER_ROLE_VALUE['staff']: $data['role'] = Constant::ROLE['staff']; break;
+            case UserConstant::USER_ROLE_VALUE['employee']: $data['role'] = Constant::ROLE['employee']; break;
             case UserConstant::USER_ROLE_VALUE['warehousestaff']: $data['role'] = Constant::ROLE['warehousestaff']; break;
             case UserConstant::USER_ROLE_VALUE['user']: $data['role'] = Constant::ROLE['user']; break;
             default: $data['role'] = Constant::ROLE['user']; break;
@@ -265,7 +265,6 @@ class NhanVienController extends Controller
             return redirect()->route('404');
         }
     }
-
 
     public function getListNhanVienSuggest()
     {

@@ -37,19 +37,39 @@ rel = "stylesheet">
         <input type="text" name="tenNhanVien" class="form-control" id="automplete-3" aria-describedby="nameHelp">
     </div> 
     <div class="form-group mt-4">
-        <label for="inputGhiChu">Ghi chú @if ($errors->has('ghiChu'))<p class="text-error">*{{$errors->first('ghiChu')}}</p>@endif</label>
-        <input type="text" name="ghiChu" class="form-control" id="inputGhiChu" aria-describedby="nameHelp">
+        <label for="inputHinhThuc">Hình thức @if ($errors->has('hinhThuc'))<p class="text-error">*{{$errors->first('hinhThuc')}}</p>@endif</label>
+        <input type="text" name="hinhThuc" class="form-control" id="inputHinhThuc" aria-describedby="nameHelp">
+    </div>
+    <div class="row">
+        <div class="form-group mt-4 col-6">
+            <label for="inputSoQuyetDinh">Số quyết định @if ($errors->has('soQuyetDinh'))<p class="text-error">*{{$errors->first('soQuyetDinh')}}</p>@endif</label>
+            <input type="text" name="soQuyetDinh" class="form-control" id="inputSoQuyetDinh" aria-describedby="nameHelp">
+        </div>
+        <div class="form-group mt-4 col-6">
+            <label for="inputNgayQuyetDinh">Ngày quyết định @if ($errors->has('ngayQuyetDinh'))<p class="text-error">*{{$errors->first('ngayQuyetDinh')}}</p>@endif</label>
+            <input type="date" name="ngayQuyetDinh" class="form-control" id="inputNgayQuyetDinh" aria-describedby="nameHelp">
+        </div>
     </div>
     <div class="form-group mt-4">
-        <label for="inputTrangThai">Trạng thái @if ($errors->has('trangThai'))<p class="text-error">*{{$errors->first('trangThai')}}</p>@endif</label>
-        <select name="trangThai" style="width:20%;height:50px;margin-left:17px " class="select form-select-lg mb-3" aria-label=".form-select-lg example">
-            <option value=''>-----------Trạng thái---------</option>
-            <option value="1">Hiển thị</option>
-            <option value="0">Ẩn</option>
-        </select>
+        <label for="inputLyDo">Lý do @if ($errors->has('lyDo'))<p class="text-error">*{{$errors->first('lyDo')}}</p>@endif</label>
+        <input type="text" name="lyDo" class="form-control" id="inputLyDo" aria-describedby="nameHelp">
+    </div>
+    <div class="row">
+        <div class="form-group mt-4 col-6">
+            <label for="inputMucPhat">Mức phạt @if ($errors->has('mucPhat'))<p class="text-error">*{{$errors->first('mucPhat')}}</p>@endif</label>
+            <input type="number" name="mucPhat" class="form-control" id="inputMucPhat" aria-describedby="nameHelp">
+        </div>
+        <div class="form-group mt-4 col-6">
+            <label for="inputMucThuong">Mức thưởng @if ($errors->has('mucThuong'))<p class="text-error">*{{$errors->first('mucThuong')}}</p>@endif</label>
+            <input type="number" name="mucThuong" class="form-control" id="inputMucPhat" aria-describedby="nameHelp">
+        </div>
+    </div>
+    <div class="form-group mt-4">
+        <label for="inputNguoiKy">Người ký @if ($errors->has('nguoiKy'))<p class="text-error">*{{$errors->first('nguoiKy')}}</p>@endif</label>
+        <input type="text" name="nguoiKy" class="form-control" id="inputNguoiKy" aria-describedby="nameHelp">
     </div>
 
-    <a href="{{route('admin.phongban.list')}}"><input type="text" class="btn btn-secondary" value="Trở về" disabled></a>
+    <a href="{{route('admin.klkt.list')}}"><input type="text" class="btn btn-secondary" value="Trở về" disabled></a>
     <button type="submit" class="btn btn-primary">Thêm mới</button>
     </form>
 </div>

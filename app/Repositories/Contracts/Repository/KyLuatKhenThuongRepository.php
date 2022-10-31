@@ -12,4 +12,19 @@ class KyLuatKhenThuongRepository extends BaseRepository implements KyLuatKhenThu
     {
         return KyLuatKhenThuong::class;
     }
+
+    public function countKLKT(?int $id)
+    {
+        $firstDayUTS = mktime (0, 0, 0, date("m"), 1, date("Y"));
+        $lastDayUTS = mktime (0, 0, 0, date("m"), date('t'), date("Y"));
+        $firstDay = date("d-m-Y", $firstDayUTS);
+        $lastDay = date("d-m-Y", $lastDayUTS);
+
+        $klkt = $this->model
+            ->where('nhanvien_id', $id)
+            ->where('created_at', '>=', $firstDay)
+            ->where('created_at', '<=', $lastDay)
+            ->get();
+        dd($klkt);
+    }
 }

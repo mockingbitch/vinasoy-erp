@@ -71,10 +71,11 @@ Route::middleware(['checklogin'])->group(function() {
             Route::get('/luong', [LuongController::class, 'getListView'])->name('admin.luong.list');
             // Route::get('/luong/{id}', [LuongController::class, 'getChiTietView'])->name('admin.luong.list');
 
-            //Quan ly ky luat khen thuyong
+            //Quan ly ky luat khen thuong
             Route::get('/thuongphat', [KyLuatKhenThuongController::class, 'getListView'])->name('admin.klkt.list');
             Route::get('/thuongphat/new', [KyLuatKhenThuongController::class, 'getCreateThuongPhatView'])->name('admin.klkt.create');
             Route::post('/thuongphat/new', [KyLuatKhenThuongController::class, 'create']);
+            Route::get('/thuongphat/delete/query', [KyLuatKhenThuongController::class, 'deleteKlkt'])->name('admin.klkt.delete');
         });
     });
 

@@ -6,4 +6,5 @@ use App\Repositories\BaseRepositoryInterface;
 
 interface KyLuatKhenThuongRepositoryInterface extends BaseRepositoryInterface
 {
+    public function countKLKT(?int $id);
 }

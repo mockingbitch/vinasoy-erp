@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <h3 align="center" style="text-shadow: 1px 1px 2px grey;">Danh sách thưởng phạt</h3>
-        <a href="{{route('admin.klkt.create')}}">
+        <a href="{{route('admin.klkt.create')}}" style="display: {{$user->role == 'ADMIN' || $user->role == 'MANAGER' ? 'block' : 'none'}}">
             <button class="btn btn-primary" style="float: right;">Thêm mới</button>
         </a>
         <table class="table table-hover">
@@ -15,7 +15,7 @@
                 <th><b>Lý do</b></th>
                 <th><b>Mức phạt</b></th>
                 <th><b>Mức thưởng</b></th>
-                <th style="{{$user->role == 'ADMIN' || $user->role == 'MANAGER' ? 'block' : 'none'}}"><b>Xoá</b></th>
+                <th style="display: {{$user->role == 'ADMIN' || $user->role == 'MANAGER' ? 'block' : 'none'}}"><b>Xoá</b></th>
             </tr>
             </thead>
             <tbody>
@@ -24,9 +24,9 @@
                 <td>{{$klkt->nhanVien->hoTen ?? ''}}</td>
                 <td>{{$klkt->hinhThuc}}</td>
                 <td>{{$klkt->lyDo}}</td>
-                <td>{{$klkt->mucPhat}}</td>
-                <td>{{$klkt->mucThuong}}</td>
-                <td align="left" style="{{$user->role == 'ADMIN' || $user->role == 'MANAGER' ? 'block' : 'none'}}">
+                <td>{{number_format($klkt->mucPhat)}}</td>
+                <td>{{number_format($klkt->mucThuong)}}</td>
+                <td align="left" style="display: {{$user->role == 'ADMIN' || $user->role == 'MANAGER' ? 'block' : 'none'}}">
                     <a class="btn btn-danger"
                         onclick="confirmDelete({{$klkt->id}})">
                         <i class="far fa-trash-alt"></i>
@@ -56,8 +56,8 @@
             dangerMode: true,
             }).then(function(isConfirm) {
             if (isConfirm) {
-                $.get("{{route('admin.phongban.delete')}}", {"id": id}, function(data) {
-                     $(".table").load("{{ route('admin.phongban.list') }} .table");
+                $.get("{{route('admin.klkt.delete')}}", {"id": id}, function(data) {
+                     $(".table").load("{{ route('admin.klkt.list') }} .table");
                 });
 
                 swal({

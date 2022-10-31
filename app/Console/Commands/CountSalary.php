@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Repositories\Contracts\Interface\NhanVienRepositoryInterface;
 use App\Repositories\Contracts\Interface\HopDongLaoDongRepositoryInterface;
+use App\Repositories\Contracts\Interface\KyLuatKhenThuongRepositoryInterface;
 use App\Models\NhanVien;
 
 class CountSalary extends Command
@@ -34,17 +35,26 @@ class CountSalary extends Command
     protected $hdldRepository;
 
     /**
+     * @var klktRepository
+     */
+    protected $klktRepository;
+
+    /**
      * @param NhanVienRepositoryInterface $nhanVienRepository
+     * @param HopDongLaoDongRepositoryInterface $hdldRepository
+     * @param KyLuatKhenThuongRepositoryInterface $klktRepository
      */
     public function __construct(
         NhanVienRepositoryInterface $nhanVienRepository,
-        HopDongLaoDongRepositoryInterface $hdldRepository
+        HopDongLaoDongRepositoryInterface $hdldRepository,
+        KyLuatKhenThuongRepositoryInterface $klktRepository
         )
     {
         parent::__construct();
 
         $this->nhanVienRepository = $nhanVienRepository;
         $this->hdldRepository = $hdldRepository;
+        $this->klktRepository = $klktRepository;
     }
 
     
@@ -57,7 +67,7 @@ class CountSalary extends Command
 
             if (! $hdld || null === $hdld) return false;
 
-            $kyluatkhenthuong = $this->kyluatkhenthuongRepository->countKLKT($user->id);
+            $kyluatkhenthuong = $this->klktRepository->countKLKT($user->id);
             //not end yet
         endforeach;
     }
