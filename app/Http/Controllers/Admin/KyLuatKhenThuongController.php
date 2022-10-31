@@ -105,7 +105,7 @@ class KyLuatKhenThuongController extends Controller
             if (! $this->klktRepository->create($data)) return redirect()->back()->with('msg', 'Error creating');
 
             return redirect()
-                ->route('admin.thuongphat.list')
+                ->route('admin.klkt.list')
                 ->with([
                     'klktErrCode' => Constant::ERR_CODE['created'],
                     'klktMessage' => Constant::MSG['created']

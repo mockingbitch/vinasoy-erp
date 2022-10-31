@@ -6,4 +6,5 @@ use App\Repositories\BaseRepositoryInterface;
 
 interface LuongRepositoryInterface extends BaseRepositoryInterface
 {
+    public function getByUser(?int $id);
 }

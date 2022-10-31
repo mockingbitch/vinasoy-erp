@@ -9,10 +9,19 @@ use App\Repositories\Contracts\Interface\LuongRepositoryInterface;
 
 class LuongController extends Controller
 {
+    /**
+     * @var string
+     */
     protected $breadcrumb = 'luong';
 
+    /**
+     * @var luongRepository
+     */
     protected $luongRepository;
 
+    /**
+     * @param LuongRepositoryInterface $luongRepository
+     */
     public function __construct(LuongRepositoryInterface $luongRepository)
     {
         $this->luongRepository = $luongRepository;
@@ -23,7 +32,11 @@ class LuongController extends Controller
      */
     public function getListView() : View
     {
-        $listLuong = $this->luongRepository->getAll();
+        $nhanVien = auth()->guard('user')->user();
+        
+        if (! $nhanVien || null == $nhanVien) return redirect()->route('404');
+
+        $listLuong = $this->luongRepository->getByUser($nhanVien->id);
 
         return view('admin.luong.list', [
             'listLuong' => $listLuong,

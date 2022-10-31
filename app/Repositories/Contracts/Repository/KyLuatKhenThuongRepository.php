@@ -5,6 +5,7 @@ namespace App\Repositories\Contracts\Repository;
 use App\Models\KyLuatKhenThuong;
 use App\Repositories\Contracts\Interface\KyLuatKhenThuongRepositoryInterface;
 use App\Repositories\BaseRepository;
+use Carbon\Carbon;
 
 class KyLuatKhenThuongRepository extends BaseRepository implements KyLuatKhenThuongRepositoryInterface
 {
@@ -13,18 +14,27 @@ class KyLuatKhenThuongRepository extends BaseRepository implements KyLuatKhenThu
         return KyLuatKhenThuong::class;
     }
 
-    public function countKLKT(?int $id)
+    /**
+     * @param integer|null $id
+     * 
+     * @return number
+     */
+    public function countKLKT(?int $id) : int
     {
         $firstDayUTS = mktime (0, 0, 0, date("m"), 1, date("Y"));
         $lastDayUTS = mktime (0, 0, 0, date("m"), date('t'), date("Y"));
-        $firstDay = date("d-m-Y", $firstDayUTS);
-        $lastDay = date("d-m-Y", $lastDayUTS);
-
-        $klkt = $this->model
+        $firstDay = date('Y-m-d', $firstDayUTS);
+        $lastDay = date('Y-m-d', $lastDayUTS);
+        $listKlkt = $this->model
             ->where('nhanvien_id', $id)
-            ->where('created_at', '>=', $firstDay)
-            ->where('created_at', '<=', $lastDay)
+            ->whereDate('created_at', '>=', $firstDay)
+            ->whereDate('created_at', '<=', $lastDay)
             ->get();
-        dd($klkt);
+        $total = 0;
+        foreach ($listKlkt as $klkt) :
+            $total += (int) $klkt->mucThuong - (int) $klkt->mucPhat; 
+        endforeach;
+
+        return $total;
     }
 }

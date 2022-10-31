@@ -12,4 +12,14 @@ class LuongRepository extends BaseRepository implements LuongRepositoryInterface
     {
         return Luong::class;
     }
+
+    /**
+     * @param integer|null $id
+     * 
+     * @return object
+     */
+    public function getByUser(?int $id) : object
+    {
+        return $this->model->where('nhanvien_id', $id)->get();
+    }
 }

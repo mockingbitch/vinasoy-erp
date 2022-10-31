@@ -65,10 +65,20 @@ class CountSalary extends Command
         foreach ($users as $user) :
             $hdld = $this->hdldRepository->getHDbyNhanVien($user->id);
 
-            if (! $hdld || null === $hdld) return false;
+            if (! $hdld || null === $hdld) continue;
 
+            $luong = (int) $hdld->mucLuong;
             $kyluatkhenthuong = $this->klktRepository->countKLKT($user->id);
-            //not end yet
+            $tongLuong = $luong + $kyluatkhenthuong;
+
+            $data = [
+                'nhanvien_id' => $user->id,
+                'thang' => date('m'),
+                'tienLuong' => $tongLuong,
+                'trangThai' => 0
+            ];
+            
+            $this->luongRepository->create($data);
         endforeach;
     }
 }

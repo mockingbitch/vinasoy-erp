@@ -23,6 +23,10 @@
         <input type="text" name="diaDiemLamViec" class="form-control" id="inputLocation" aria-describedby="nameHelp" value="{{$hdld->diaDiemLamViec ?? ''}}">
     </div>
     <div class="form-group mt-4">
+        <label for="inputMucLuong">Mức lương @if ($errors->has('mucLuong'))<p class="text-error">*{{$errors->first('mucLuong')}}</p>@endif</label>
+        <input type="text" name="mucLuong" class="form-control" id="inputMucLuong" aria-describedby="nameHelp" value="{{$hdld->mucLuong ?? ''}}">
+    </div>
+    <div class="form-group mt-4">
         <label for="inputNgachLuong">Ngạch lương @if ($errors->has('ngachLuong'))<p class="text-error">*{{$errors->first('ngachLuong')}}</p>@endif</label>
         <input type="text" name="ngachLuong" class="form-control" id="inputNgachLuong" aria-describedby="nameHelp" value="{{$hdld->ngachLuong ?? ''}}">
     </div>
