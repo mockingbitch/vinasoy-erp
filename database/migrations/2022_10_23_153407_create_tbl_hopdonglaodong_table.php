@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('ngachLuong')->nullable();
             $table->string('bacLuong')->nullable();
             $table->string('heSoLuong')->nullable();
+            $table->string('mucLuong')->nullable();
             $table->string('phuCap')->nullable();
             $table->string('nguoiKy')->nullable();
             $table->string('chucVu')->nullable();

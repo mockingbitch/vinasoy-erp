@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\NhanVien;
 
 class HopDongLaoDong extends Model
 {
@@ -31,4 +32,9 @@ class HopDongLaoDong extends Model
         'nguoiKy',
         'ngayKy'
     ];
+
+    public function nhanVien()
+    {
+        return $this->belongsTo(NhanVien::class, 'nhanvien_id');
+    }
 }

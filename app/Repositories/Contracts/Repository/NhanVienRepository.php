@@ -12,4 +12,19 @@ class NhanVienRepository extends BaseRepository implements NhanVienRepositoryInt
     {
         return NhanVien::class;
     }
+
+    /**
+     * @return array
+     */
+    public function getListSuggest() : array
+    {
+        $listNhanVien = $this->model->all();
+        $arrSuggest = [];
+
+        foreach ($listNhanVien as $nhanVien) :
+            $arrSugest[] = $nhanVien->id . '-' . $nhanVien->hoTen;
+        endforeach;
+
+        return $arrSugest;
+    }
 }

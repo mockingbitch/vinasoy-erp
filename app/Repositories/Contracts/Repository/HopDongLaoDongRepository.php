@@ -23,11 +23,11 @@ class HopDongLaoDongRepository extends BaseRepository implements HopDongLaoDongR
         return $this->model->where('nhanvien_id', $id)->first();
     }
 
-    public function createOrUpdate(int $id, $data = [])
+    public function createOrUpdate(int $id, $data = []) 
     {
         $hdld = $this->getHDbyNhanVien($id);
         $data['nhanvien_id'] = $id;
-        
+
         if (! $hdld || null == $hdld) :
             return $this->create($data);
         endif;

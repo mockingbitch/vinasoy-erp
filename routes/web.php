@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\PhongBanController;
 use App\Http\Controllers\Admin\ChucVuController;
 use App\Http\Controllers\Admin\HopDongLaoDongController;
 use App\Http\Controllers\Admin\LuongController;
+use App\Http\Controllers\Admin\KyLuatKhenThuongController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,7 @@ Route::middleware(['checklogin'])->group(function() {
             Route::get('/nhanvien/{id}', [NhanVienController::class, 'getUpdateNhanVienView'])->name('admin.nhanvien.update');
             Route::post('/nhanvien/{id}', [NhanVienController::class, 'updateNhanVien']);
             Route::get('/nhanvien/delete/query', [NhanVienController::class, 'deleteNhanVien'])->name('admin.nhanvien.delete');
+            Route::get('/listnhanviensuggest', [NhanVienController::class, 'getListNhanVienSuggest'])->name('getListNhanVienSuggest');
 
             // Quan ly phong ban
             Route::get('/phongban', [PhongBanController::class, 'list'])->name('admin.phongban.list');
@@ -65,8 +67,14 @@ Route::middleware(['checklogin'])->group(function() {
             Route::get('/hopdong/{id}', [HopDongLaoDongController::class, 'getHopDongView'])->name('admin.hopdong');
             Route::post('/hopdong/{id}', [HopDongLaoDongController::class, 'createOrUpdateHopDong']);
 
+            //Quan ly luong
             Route::get('/luong', [LuongController::class, 'getListView'])->name('admin.luong.list');
             // Route::get('/luong/{id}', [LuongController::class, 'getChiTietView'])->name('admin.luong.list');
+
+            //Quan ly ky luat khen thuyong
+            Route::get('/thuongphat', [KyLuatKhenThuongController::class, 'getListView'])->name('admin.klkt.list');
+            Route::get('/thuongphat/new', [KyLuatKhenThuongController::class, 'getCreateThuongPhatView'])->name('admin.klkt.create');
+            Route::post('/thuongphat/new', [KyLuatKhenThuongController::class, 'create']);
         });
     });
 

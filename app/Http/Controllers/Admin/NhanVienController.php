@@ -265,4 +265,13 @@ class NhanVienController extends Controller
             return redirect()->route('404');
         }
     }
+
+
+    public function getListNhanVienSuggest()
+    {
+        header('Content-Type: application/json;charset=utf-8'); 
+        $listNhanVienSuggest = $this->nhanVienRepository->getListSuggest();
+
+        return response()->json($listNhanVienSuggest);
+    }
 }

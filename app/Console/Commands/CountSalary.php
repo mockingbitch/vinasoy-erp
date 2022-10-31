@@ -3,7 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-// use App\Repositories\Contracts\Interface\NhanVienRepositoryInterface;
+use App\Repositories\Contracts\Interface\NhanVienRepositoryInterface;
+use App\Repositories\Contracts\Interface\HopDongLaoDongRepositoryInterface;
 use App\Models\NhanVien;
 
 class CountSalary extends Command
@@ -23,14 +24,41 @@ class CountSalary extends Command
     protected $description = 'Count salary for all staff';
 
     /**
-     * Execute the console command.
-     *
-     * @return int
+     * @var nhanVienRepository
      */
+    protected $nhanVienRepository;
+
+    /**
+     * @var hdldRepository
+     */
+    protected $hdldRepository;
+
+    /**
+     * @param NhanVienRepositoryInterface $nhanVienRepository
+     */
+    public function __construct(
+        NhanVienRepositoryInterface $nhanVienRepository,
+        HopDongLaoDongRepositoryInterface $hdldRepository
+        )
+    {
+        parent::__construct();
+
+        $this->nhanVienRepository = $nhanVienRepository;
+        $this->hdldRepository = $hdldRepository;
+    }
+
+    
     public function handle()
     {
-        // $user = $this->nhanVienRepository->find(1);
-        $user = NhanVien::where('id', 1)->first();
-        dd($user->hoTen);
+        $users = $this->nhanVienRepository->getAll();
+
+        foreach ($users as $user) :
+            $hdld = $this->hdldRepository->getHDbyNhanVien($user->id);
+
+            if (! $hdld || null === $hdld) return false;
+
+            $kyluatkhenthuong = $this->kyluatkhenthuongRepository->countKLKT($user->id);
+            //not end yet
+        endforeach;
     }
 }

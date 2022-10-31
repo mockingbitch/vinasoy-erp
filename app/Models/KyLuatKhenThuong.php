@@ -7,23 +7,27 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\NhanVien;
 
-class Luong extends Model
+class KyLuatKhenThuong extends Model
 {
     use HasFactory, SoftDeletes;
 
     /**
      * @var string
      */
-    protected $table = 'tbl_luong';
+    protected $table = 'tbl_chucvu';
 
     /**
      * @var array
      */
     protected $fillable = [
         'nhanvien_id',
-        'thang',
-        'tienLuong',
-        'trangThai'
+        'hinhThuc',
+        'soQuyetDinh',
+        'ngayQuyetDinh',
+        'lyDo',
+        'mucPhat',
+        'mucThuong',
+        'nguoiKy'
     ];
 
     public function nhanVien()

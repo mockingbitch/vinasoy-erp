@@ -6,4 +6,5 @@ use App\Repositories\BaseRepositoryInterface;
 
 interface NhanVienRepositoryInterface extends BaseRepositoryInterface
 {
+    public function getListSuggest();
 }

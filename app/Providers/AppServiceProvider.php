@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,7 +21,8 @@ class AppServiceProvider extends ServiceProvider
             'ChucVu',
             'PhongBan',
             'HopDongLaoDong',
-            'Luong'
+            'Luong',
+            'KyLuatKhenThuong'
         ];
 
         foreach ($models as $model) {
@@ -36,5 +38,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        view()->composer('dashboardLayout', function($view) {
+            $user = Auth::guard('user')->user();
+
+            view()->share('user', $user);
+        });
     }
 }
