@@ -34,8 +34,8 @@
                     @endif
                 </td>
                 <td style="text-align: center">{{$nhanVien->ngaySinh}}</td>
-                <td style="text-align: center">{{$nhanVien->phongBan->tenPhong}}</td>
                 <td style="text-align: center">{{$nhanVien->chucVu->tenChucVu}}</td>
+                <td style="text-align: center">{{null !== $nhanVien->phongBan ? $nhanVien->phongBan->tenPhong : 'null'}}</td>
                 <td align="left" style="text-align: center">
                     <a class="btn btn-danger"
                         onclick="confirmDelete({{$nhanVien->id}})">
