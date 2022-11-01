@@ -10,22 +10,22 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th><b>Tên nhân viên</b></th>
-                <th><b>Hình thức</b></th>
-                <th><b>Lý do</b></th>
-                <th><b>Mức phạt</b></th>
-                <th><b>Mức thưởng</b></th>
+                <th style="text-align: center"><b>Tên nhân viên</b></th>
+                <th style="text-align: center"><b>Hình thức</b></th>
+                <th style="text-align: center"><b>Lý do</b></th>
+                <th style="text-align: center"><b>Mức phạt</b></th>
+                <th style="text-align: center"><b>Mức thưởng</b></th>
                 <th style="display: {{$user->role == 'ADMIN' || $user->role == 'MANAGER' ? 'block' : 'none'}}"><b>Xoá</b></th>
             </tr>
             </thead>
             <tbody>
             @foreach($listKLKT as $klkt)
             <tr class="tb-row" onclick="handleClickRow({{$klkt->id}})">
-                <td>{{$klkt->nhanVien->hoTen ?? ''}}</td>
-                <td>{{$klkt->hinhThuc}}</td>
-                <td>{{$klkt->lyDo}}</td>
-                <td>{{number_format($klkt->mucPhat)}}</td>
-                <td>{{number_format($klkt->mucThuong)}}</td>
+                <td style="text-align: center">{{$klkt->nhanVien->hoTen ?? ''}}</td>
+                <td style="text-align: center">{{$klkt->hinhThuc}}</td>
+                <td style="text-align: center">{{$klkt->lyDo}}</td>
+                <td style="text-align: center">{{number_format($klkt->mucPhat)}}</td>
+                <td style="text-align: center">{{number_format($klkt->mucThuong)}}</td>
                 <td align="left" style="display: {{$user->role == 'ADMIN' || $user->role == 'MANAGER' ? 'block' : 'none'}}">
                     <a class="btn btn-danger"
                         onclick="confirmDelete({{$klkt->id}})">

@@ -10,18 +10,19 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th><b>Tên nhân viên</b></th>
-                <th><b>Tháng</b></th>
-                <th><b>Tiền lương</b></th>
-                <th><b>Trạng thái</b></th>
+                <th style="text-align: center"><b>Tên nhân viên</b></th>
+                <th style="text-align: center"><b>Tháng</b></th>
+                <th style="text-align: center"><b>Tiền lương</b></th>
+                <th style="text-align: center"><b>Trạng thái</b></th>
             </tr>
             </thead>
             <tbody>
             @foreach($listLuong as $luong)
             <tr class="tb-row" onclick="handleClickRow({{$luong->id}})">
-                <td>{{$luong->nhanvien->hoTen}}</td>
-                <td>{{$luong->thang}}</td>
-                <td>{{$luong->trangThai == '1' ? 'Đã quyết toán' : 'Chưa quyết toán'}}</td>
+                <td style="text-align: center">{{$luong->nhanvien->hoTen}}</td>
+                <td style="text-align: center">{{$luong->thang}}</td>
+                <td style="text-align: center">{{$luong->tienLuong}}</td>
+                <td style="text-align: center">{{$luong->trangThai == '1' ? 'Đã quyết toán' : 'Chưa quyết toán'}}</td>
             </tr>
             @endforeach
             </tbody>

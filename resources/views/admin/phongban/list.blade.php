@@ -10,27 +10,25 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th><b>ID</b></th>
-                <th><b>Tên phòng ban</b></th>
-                <th><b>Ghi chú</b></th>
-                <th><b>Trạng thái</b></th>
-                <th><b>Sửa</b></th>
-                <th><b>Xoá</b></th>
+                <th style="text-align: center"><b>Tên phòng ban</b></th>
+                <th style="text-align: center"><b>Ghi chú</b></th>
+                <th style="text-align: center"><b>Trạng thái</b></th>
+                <th style="text-align: center"><b>Sửa</b></th>
+                <th style="text-align: center"><b>Xoá</b></th>
             </tr>
             </thead>
             <tbody>
             @foreach($listPhongBan as $phongBan)
             <tr class="tb-row" onclick="handleClickRow({{$phongBan->id}})">
-                <td>{{$phongBan->id}}</td>
-                <td>{{$phongBan->tenPhong}}</td>
-                <td>{{$phongBan->ghiChu}}</td>
-                <td>{{$phongBan->trangThai == '1' ? 'Hiển thị' : 'Ẩn'}}</td>
-                <td align="left">
+                <td style="text-align: center">{{$phongBan->tenPhong}}</td>
+                <td style="text-align: center">{{$phongBan->ghiChu}}</td>
+                <td style="text-align: center">{{$phongBan->trangThai == '1' ? 'Hiển thị' : 'Ẩn'}}</td>
+                <td align="left" style="text-align: center">
                     <a class="btn btn-success" href="{{route('admin.phongban.update', ['id' => $phongBan->id])}}">
                         <i class="fas fa-edit"></i>
                     </a>
                 </td>
-                <td align="left">
+                <td align="left" style="text-align: center">
                     <a class="btn btn-danger"
                         onclick="confirmDelete({{$phongBan->id}})">
                         <i class="far fa-trash-alt"></i>

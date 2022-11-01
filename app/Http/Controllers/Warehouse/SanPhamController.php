@@ -5,6 +5,8 @@ namespace App\Http\Controllers\warehouse;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\Contracts\Interface\SanPhamRepositoryInterface;
+use App\Repositories\Contracts\Interface\DanhMucRepositoryInterface;
+use App\Repositories\Contracts\Interface\NhaCungCapRepositoryInterface;
 use App\Http\Requests\SanPhamRequest;
 use App\Constants\Constant;
 use Illuminate\View\View;
@@ -12,21 +14,35 @@ use Illuminate\View\View;
 class SanPhamController extends Controller
 {
     /**
-     * @var sanPhamRepository
-     */
-    protected $sanPhamRepository;
-
-    /**
      * @var string
      */
     protected $breadcrumb = 'sanpham';
 
     /**
-     * @param SanPhamRepositoryInterface $sanPhamRepository
+     * @var sanPhamRepository
      */
-    public function __construct(SanPhamRepositoryInterface $sanPhamRepository)
+    protected $sanPhamRepository;
+
+    /**
+     * @var danhMucRepository
+     */
+    protected $danhMucRepository;
+
+    /**
+     * @var nhaCungCapRepository
+     */
+    protected $nhaCungCapRepository;
+
+    
+    public function __construct(
+        SanPhamRepositoryInterface $sanPhamRepository,
+        DanhMucRepositoryInterface $danhMucRepository,
+        NhaCungCapRepositoryInterface $nhaCungCapRepository
+        )
     {
         $this->sanPhamRepository = $sanPhamRepository;
+        $this->danhMucRepository = $danhMucRepository;
+        $this->nhaCungCapRepository = $nhaCungCapRepository;
     }
 
     /**
@@ -155,13 +171,21 @@ class SanPhamController extends Controller
      */
     public function getCreateView() : View
     {
-        $listDanhmuc = $this->danhMucRepository->getAll();
+        $listDanhMuc = $this->danhMucRepository->getAll();
         $listNhaCC = $this->nhaCungCapRepository->getAll();
 
         return view('warehouse.sanpham.create', [
             'breadcrumb' => $this->breadcrumb,
-            'listDanhmuc' => $listDanhmuc,
+            'listDanhMuc' => $listDanhMuc,
             'listNhaCC' => $listNhaCC,
         ]);
+    }
+
+    public function getListSanPhamSuggest()
+    {
+        header('Content-Type: application/json;charset=utf-8'); 
+        $listSanPhamSuggest = $this->sanPhamRepository->getListSuggest();
+
+        return response()->json($listSanPhamSuggest);
     }
 }

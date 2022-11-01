@@ -10,27 +10,27 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th><b>ID</b></th>
-                <th><b>Tên chức vụ</b></th>
-                <th><b>Ghi chú</b></th>
-                <th><b>Trạng thái</b></th>
-                <th><b>Sửa</b></th>
-                <th><b>Xoá</b></th>
+                <th style="text-align: center"><b>ID</b></th>
+                <th style="text-align: center"><b>Tên chức vụ</b></th>
+                <th style="text-align: center"><b>Ghi chú</b></th>
+                <th style="text-align: center"><b>Trạng thái</b></th>
+                <th style="text-align: center"><b>Sửa</b></th>
+                <th style="text-align: center"><b>Xoá</b></th>
             </tr>
             </thead>
             <tbody>
             @foreach($listChucVu as $chucVu)
             <tr class="tb-row" onclick="handleClickRow({{$chucVu->id}})">
-                <td>{{$chucVu->id}}</td>
-                <td>{{$chucVu->tenChucVu}}</td>
-                <td>{{$chucVu->ghiChu}}</td>
-                <td>{{$chucVu->trangThai == '1' ? 'Hiển thị' : 'Ẩn'}}</td>
-                <td align="left">
+                <td style="text-align: center">{{$chucVu->id}}</td>
+                <td style="text-align: center">{{$chucVu->tenChucVu}}</td>
+                <td style="text-align: center">{{$chucVu->ghiChu}}</td>
+                <td style="text-align: center">{{$chucVu->trangThai == '1' ? 'Hiển thị' : 'Ẩn'}}</td>
+                <td align="left" style="text-align: center">
                     <a class="btn btn-success" href="{{route('admin.chucvu.update', ['id' => $chucVu->id])}}">
                         <i class="fas fa-edit"></i>
                     </a>
                 </td>
-                <td align="left">
+                <td align="left" style="text-align: center">
                     <a class="btn btn-danger"
                         onclick="confirmDelete({{$chucVu->id}})">
                         <i class="far fa-trash-alt"></i>

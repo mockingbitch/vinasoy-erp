@@ -20,9 +20,6 @@ return new class extends Migration
             $table->foreign('danhmuc_id')->references('id')->on('tbl_danhmuc');
             $table->unsignedBigInteger('nhacungcap_id');
             $table->foreign('nhacungcap_id')->references('id')->on('tbl_nhacungcap');
-            $table->string('soLuong')->nullable();
-            $table->string('nsx')->nullable();
-            $table->string('hsd')->nullable();
             $table->string('donGia');
             $table->string('moTa')->nullable();
             $table->string('img')->nullable();

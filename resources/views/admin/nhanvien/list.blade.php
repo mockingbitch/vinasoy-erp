@@ -10,21 +10,21 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th><b>ID</b></th>
-                <th><b>Họ tên</b></th>
-                <th><b>Giới tính</b></th>
-                <th><b>Ngày sinh</b></th>
-                <th><b>Chức vụ</b></th>
-                <th><b>Mã phòng</b></th>
-                <th><b>Xoá</b></th>
+                <th style="text-align: center"><b>ID</b></th>
+                <th style="text-align: center"><b>Họ tên</b></th>
+                <th style="text-align: center"><b>Giới tính</b></th>
+                <th style="text-align: center"><b>Ngày sinh</b></th>
+                <th style="text-align: center"><b>Chức vụ</b></th>
+                <th style="text-align: center"><b>Mã phòng</b></th>
+                <th style="text-align: center"><b>Xoá</b></th>
             </tr>
             </thead>
             <tbody>
             @foreach($listNhanVien as $nhanVien)
             <tr class="tb-row" onclick="handleClickRow({{$nhanVien->id}})">
-                <td>{{$nhanVien->id}}</td>
-                <td>{{$nhanVien->hoTen}}</td>
-                <td>
+                <td style="text-align: center">{{$nhanVien->id}}</td>
+                <td style="text-align: center">{{$nhanVien->hoTen}}</td>
+                <td style="text-align: center">
                     @if ($nhanVien->gioiTinh == 0)
                         Nam
                     @elseif ($nhanVien->gioiTinh == 1)
@@ -33,10 +33,10 @@
                         Khác
                     @endif
                 </td>
-                <td>{{$nhanVien->ngaySinh}}</td>
-                <td>{{$nhanVien->phongBan->tenPhong}}</td>
-                <td>{{$nhanVien->chucVu->tenChucVu}}</td>
-                <td align="left">
+                <td style="text-align: center">{{$nhanVien->ngaySinh}}</td>
+                <td style="text-align: center">{{$nhanVien->phongBan->tenPhong}}</td>
+                <td style="text-align: center">{{$nhanVien->chucVu->tenChucVu}}</td>
+                <td align="left" style="text-align: center">
                     <a class="btn btn-danger"
                         onclick="confirmDelete({{$nhanVien->id}})">
                         <i class="far fa-trash-alt"></i>

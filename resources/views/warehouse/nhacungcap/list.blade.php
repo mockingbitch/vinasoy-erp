@@ -68,8 +68,8 @@
             dangerMode: true,
             }).then(function(isConfirm) {
             if (isConfirm) {
-                $.get("{{route('warehouse.danhmuc.delete')}}", {"id": id}, function(data) {
-                     $(".table").load("{{ route('warehouse.danhmuc.list') }} .table");
+                $.get("{{route('warehouse.nhacungcap.delete')}}", {"id": id}, function(data) {
+                     $(".table").load("{{ route('warehouse.nhacungcap.list') }} .table");
                 });
 
                 swal({

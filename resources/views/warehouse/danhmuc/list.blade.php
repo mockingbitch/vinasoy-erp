@@ -10,23 +10,23 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th><b>Tên danh mục</b></th>
-                <th><b>Trạng thái</b></th>
-                <th><b>Sửa</b></th>
-                <th><b>Xoá</b></th>
+                <th style="text-align: center"><b>Tên danh mục</b></th>
+                <th style="text-align: center"><b>Trạng thái</b></th>
+                <th style="text-align: center"><b>Sửa</b></th>
+                <th style="text-align: center"><b>Xoá</b></th>
             </tr>
             </thead>
             <tbody>
             @foreach($listDanhMuc as $danhMuc)
             <tr class="tb-row" onclick="handleClickRow({{$danhMuc->id}})">
-                <td>{{$danhMuc->tenDanhMuc}}</td>
-                <td>{{$danhMuc->trangThai == '1' ? 'Hiển thị' : 'Ẩn'}}</td>
-                <td align="left">
+                <td style="text-align: center">{{$danhMuc->tenDanhMuc}}</td>
+                <td style="text-align: center">{{$danhMuc->trangThai == '1' ? 'Hiển thị' : 'Ẩn'}}</td>
+                <td align="left" style="text-align: center">
                     <a class="btn btn-success" href="{{route('warehouse.danhmuc.update', ['id' => $danhMuc->id])}}">
                         <i class="fas fa-edit"></i>
                     </a>
                 </td>
-                <td align="left">
+                <td align="left" style="text-align: center">
                     <a class="btn btn-danger"
                         onclick="confirmDelete({{$danhMuc->id}})">
                         <i class="far fa-trash-alt"></i>

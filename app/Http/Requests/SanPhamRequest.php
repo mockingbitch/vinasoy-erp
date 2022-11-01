@@ -13,7 +13,7 @@ class SanPhamRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,25 @@ class SanPhamRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'tenSP' => 'required',
+            'donGia' => 'required|numeric|min:1',
+            'img' => 'image',
+        ];
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, mixed>
+     */
+    public function messages()
+    {
+        return [
+            'tenSP.required' => 'Tên sản phẩm không được bỏ trống',
+            'donGia.required' => 'Đơn giá không được bỏ trống',
+            'donGia.numeric' => 'Đơn giá phải là kiểu số',
+            'donGia.min' => 'Vui lòng nhập giá lớn hơn 1',
+            'img.image' => 'File tải lên phải là hình ảnh'
         ];
     }
 }

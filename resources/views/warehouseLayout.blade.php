@@ -121,7 +121,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {{$breadcrumb == 'kyluatkhenthuong' ? 'active' : ''}}" href="{{route('admin.klkt.list')}}">
+          <a class="nav-link {{$breadcrumb == 'nhapxuat' ? 'active' : ''}}" href="{{route('warehouse.nhapxuat.list')}}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 {{-- <title>settings</title> --}}
@@ -138,7 +138,7 @@
                 </g>
               </svg>
             </div>
-            <span class="nav-link-text ms-1">Thưởng phạt</span>
+            <span class="nav-link-text ms-1">Quản lý nhập xuất kho</span>
           </a>
         </li>
         <li class="nav-item" style="display: {{$user->role == 'ADMIN' || $user->role == 'MANAGER' ? 'block' : 'none'}}">
