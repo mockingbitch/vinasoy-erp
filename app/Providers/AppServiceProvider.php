@@ -22,7 +22,12 @@ class AppServiceProvider extends ServiceProvider
             'PhongBan',
             'HopDongLaoDong',
             'Luong',
-            'KyLuatKhenThuong'
+            'KyLuatKhenThuong',
+            'NhaCungCap',
+            'DanhMuc',
+            'SanPham',
+            'NhapXuat',
+            'ChiTietNhapXuat'
         ];
 
         foreach ($models as $model) {

@@ -13,7 +13,8 @@ class WarehouseController extends Controller
         $user = Auth::user();
 
         return view('warehouse.home', [
-            'user' => $user
+            'user' => $user,
+            'breadcrumb' => 'warehousehome'
         ]);
     }
 }

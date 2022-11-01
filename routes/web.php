@@ -11,7 +11,9 @@ use App\Http\Controllers\Admin\ChucVuController;
 use App\Http\Controllers\Admin\HopDongLaoDongController;
 use App\Http\Controllers\Admin\LuongController;
 use App\Http\Controllers\Admin\KyLuatKhenThuongController;
-
+use App\Http\Controllers\Warehouse\NhaCungCapController;
+use App\Http\Controllers\Warehouse\DanhMucController;
+use App\Http\Controllers\Warehouse\SanPhamController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -83,6 +85,30 @@ Route::middleware(['checklogin'])->group(function() {
     Route::middleware(['checkRoleWareHouse'])->group(function() {
         Route::prefix('warehouse')->group(function() {
             Route::get('/', [WarehouseController::class, 'index'])->name('warehouse.home');
+
+            // Quan ly nha cung cap
+            Route::get('/nhacungcap', [NhaCungCapController::class, 'list'])->name('warehouse.nhacungcap.list');
+            Route::get('/nhacungcap/new', [NhaCungCapController::class, 'getCreateView'])->name('warehouse.nhacungcap.create');
+            Route::post('/nhacungcap/new', [NhaCungCapController::class, 'create']);
+            Route::get('/nhacungcap/{id}', [NhaCungCapController::class, 'getUpdateView'])->name('warehouse.nhacungcap.update');
+            Route::post('/nhacungcap/{id}', [NhaCungCapController::class, 'update']);
+            Route::get('/nhacungcap/delete/query', [NhaCungCapController::class, 'delete'])->name('warehouse.nhacungcap.delete');
+
+            //Quan ly danh muc
+            Route::get('/danhmuc', [DanhMucController::class, 'list'])->name('warehouse.danhmuc.list');
+            Route::get('/danhmuc/new', [DanhMucController::class, 'getCreateView'])->name('warehouse.danhmuc.create');
+            Route::post('/danhmuc/new', [DanhMucController::class, 'create']);
+            Route::get('/danhmuc/{id}', [DanhMucController::class, 'getUpdateView'])->name('warehouse.danhmuc.update');
+            Route::post('/danhmuc/{id}', [DanhMucController::class, 'update']);
+            Route::get('/danhmuc/delete/query', [DanhMucController::class, 'delete'])->name('warehouse.danhmuc.delete');
+
+            //Quan ly san pham
+            Route::get('/sanpham', [SanPhamController::class, 'list'])->name('warehouse.sanpham.list');
+            Route::get('/sanpham/new', [SanPhamController::class, 'getCreateView'])->name('warehouse.sanpham.create');
+            Route::post('/sanpham/new', [SanPhamController::class, 'create']);
+            Route::get('/sanpham/{id}', [SanPhamController::class, 'getUpdateView'])->name('warehouse.sanpham.update');
+            Route::post('/sanpham/{id}', [SanPhamController::class, 'update']);
+            Route::get('/sanpham/delete/query', [SanPhamController::class, 'delete'])->name('warehouse.sanpham.delete');
         });
     });
 });

@@ -5,7 +5,6 @@ namespace App\Repositories\Contracts\Repository;
 use App\Models\KyLuatKhenThuong;
 use App\Repositories\Contracts\Interface\KyLuatKhenThuongRepositoryInterface;
 use App\Repositories\BaseRepository;
-use Carbon\Carbon;
 
 class KyLuatKhenThuongRepository extends BaseRepository implements KyLuatKhenThuongRepositoryInterface
 {

@@ -15,6 +15,9 @@ class ChucVuController extends Controller
      */
     protected $chucVuRepository;
 
+    /**
+     * @var string
+     */
     protected $breadcrumb = 'chucvu';
 
     /**
@@ -104,7 +107,13 @@ class ChucVuController extends Controller
         }
     }
 
-    public function updateChucVu($id, Request $request)
+    /**
+     * @param [type] $id
+     * @param ChucVuRequest $request
+     * 
+     * @return void
+     */
+    public function updateChucVu($id, ChucVuRequest $request)
     {
         try {
             if (! $this->chucVuRepository->update((int) $id, $request->toArray())) :

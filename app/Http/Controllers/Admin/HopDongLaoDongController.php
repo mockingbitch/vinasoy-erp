@@ -22,7 +22,7 @@ class HopDongLaoDongController extends Controller
      */
     protected $nhanVienRepository;
 
-    protected $breadcrumb = '';
+    protected $breadcrumb = 'hopdonglaodong';
 
     /**
      * @param HopDongLaoDongRepositoryInterface $hopDongRepository
@@ -62,7 +62,7 @@ class HopDongLaoDongController extends Controller
 
     public function createOrUpdateHopDong(string $id, HopDongRequest $request)
     {
-        // try {
+        try {
             $nhanVien = $this->nhanVienRepository->find((int) $id);
 
             if (! $nhanVien || null == $nhanVien) :
@@ -79,8 +79,8 @@ class HopDongLaoDongController extends Controller
                     'nhanVienErrCode' => Constant::ERR_CODE['created'],
                     'nhanVienMessage' => Constant::MSG['created']
                 ]);
-        // } catch (\Throwable $th) {
-        //     return redirect()->route('404');
-        // }
+        } catch (\Throwable $th) {
+            return redirect()->route('404');
+        }
     }
 }
