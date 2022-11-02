@@ -80,6 +80,9 @@ Route::middleware(['checklogin'])->group(function() {
             Route::get('/thuongphat/new', [KyLuatKhenThuongController::class, 'getCreateThuongPhatView'])->name('admin.klkt.create');
             Route::post('/thuongphat/new', [KyLuatKhenThuongController::class, 'create']);
             Route::get('/thuongphat/delete/query', [KyLuatKhenThuongController::class, 'deleteKlkt'])->name('admin.klkt.delete');
+
+            //Profile
+            Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
         });
     });
 

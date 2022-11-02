@@ -10,7 +10,6 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th style="text-align: center"><b>ID</b></th>
                 <th style="text-align: center"><b>Tên chức vụ</b></th>
                 <th style="text-align: center"><b>Ghi chú</b></th>
                 <th style="text-align: center"><b>Trạng thái</b></th>
@@ -21,7 +20,6 @@
             <tbody>
             @foreach($listChucVu as $chucVu)
             <tr class="tb-row" onclick="handleClickRow({{$chucVu->id}})">
-                <td style="text-align: center">{{$chucVu->id}}</td>
                 <td style="text-align: center">{{$chucVu->tenChucVu}}</td>
                 <td style="text-align: center">{{$chucVu->ghiChu}}</td>
                 <td style="text-align: center">{{$chucVu->trangThai == '1' ? 'Hiển thị' : 'Ẩn'}}</td>

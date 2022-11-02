@@ -181,10 +181,10 @@ class SanPhamController extends Controller
         ]);
     }
 
-    public function getListSanPhamSuggest()
+    public function getListSanPhamSuggest(Request $request)
     {
         header('Content-Type: application/json;charset=utf-8'); 
-        $listSanPhamSuggest = $this->sanPhamRepository->getListSuggest();
+        $listSanPhamSuggest = $this->sanPhamRepository->getListSuggest($request->query('nhacungcap'));
 
         return response()->json($listSanPhamSuggest);
     }

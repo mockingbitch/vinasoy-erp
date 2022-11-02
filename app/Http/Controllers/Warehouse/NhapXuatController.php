@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Repositories\Contracts\Interface\NhapXuatRepositoryInterface;
 use App\Repositories\Contracts\Interface\ChiTietNhapXuatRepositoryInterface;
 use App\Repositories\Contracts\Interface\NhaCungCapRepositoryInterface;
+use App\Repositories\Contracts\Interface\SanPhamRepositoryInterface;
 use App\Http\Requests\NhapXuatRequest;
 use Illuminate\View\View;
 use App\Constants\Constant;
@@ -29,21 +30,33 @@ class NhapXuatController extends Controller
      */
     protected $chiTietNhapXuatRepository;
 
+    /**
+     * @var nhaCungCapRepository
+     */
     protected $nhaCungCapRepository;
+
+    /**
+     * @var sanPhamRepository
+     */
+    protected $sanPhamRepository;
 
     /**
      * @param NhapXuatRepositoryInterface $nhapXuatRepository
      * @param ChiTietNhapXuatRepositoryInterface $chiTietNhapXuatRepository
+     * @param NhaCungCapRepositoryInterface $nhaCungCapRepository
+     * @param SanPhamRepositoryInterface $sanPhamRepository
      */
     public function __construct(
         NhapXuatRepositoryInterface $nhapXuatRepository,
         ChiTietNhapXuatRepositoryInterface $chiTietNhapXuatRepository,
-        NhaCungCapRepositoryInterface $nhaCungCapRepository
+        NhaCungCapRepositoryInterface $nhaCungCapRepository,
+        SanPhamRepositoryInterface $sanPhamRepository
         )
     {
         $this->nhapXuatRepository = $nhapXuatRepository;
         $this->chiTietNhapXuatRepository = $chiTietNhapXuatRepository;
         $this->nhaCungCapRepository = $nhaCungCapRepository;
+        $this->sanPhamRepository = $sanPhamRepository;
     }
 
     /**
@@ -97,18 +110,16 @@ class NhapXuatController extends Controller
     public function create(NhapXuatRequest $request)
     {
         // try {
-            $string = $request->sanpham;
-            $arrStringName = explode('-', $string);
+            $listSanPham = $this->sanPhamRepository->getListSPFromRequest($request->toArray());
+            
             $user = auth()->guard('user')->user();
 
-            if (! $sanPham = $this->sanPhamRepository->find((int) $arrStringName[0]) || ! $user || null == $user) return redirect()->route('warehouse.nhapxuat.create')->with('msg', 'Không tìm thấy sản phẩm trong CSDL');
+            if (! $listSanPham || null == $listSanPham || ! $user) return redirect()->route('warehouse.nhapxuat.create')->with('msg', 'Không tìm thấy sản phẩm'); 
 
             $data = [
-                'sanpham_id' => $sanPham->id,
-                'nhanvien_id' => $user->id,
                 'nhacungcap_id' => $request->nhacungcap_id,
-                'soLuong' => $request->soLuong,
-                'type' => (int) $request->type == 1 ? Constant::NHAPXUAT['xuat'] : Constant::NHAPXUAT['nhap']
+                'user_id' => $user->id,
+                'type' => (int) $request->type == 1 ? NhapXuatConstant::NHAPXUAT['xuat'] : NhapXuatConstant::NHAPXUAT['nhap']
             ];
 
             if (! $nhapXuat =  $this->nhapXuatRepository->create($data)) :
@@ -120,6 +131,8 @@ class NhapXuatController extends Controller
                     ]);
             endif;
 
+            $this->createChiTietNhapXuat($nhapXuat->id, $listSanPham);
+
             return redirect()
                 ->route('warehouse.nhapxuat.list')
                 ->with([
@@ -129,5 +142,32 @@ class NhapXuatController extends Controller
         // } catch (\Throwable $th) {
         //     return redirect()->route('404');
         // }
+    }
+
+    /**
+     * call from function createNhapXuat
+     * 
+     * @param integer $id
+     * @param array $listSanPham
+     * @return void
+     */
+    public function createChiTietNhapXuat(int $id, $listSanPham = [])
+    {
+        $total = 0;
+
+        foreach($listSanPham as $sanPham) :
+            $data = [
+                'nhapxuat_id' => $id,
+                'sanpham_id' => $sanPham['sanpham_id'],
+                'soLuong' => $sanPham['soLuong'],
+                'donGia' => $sanPham['donGia']
+            ];
+        
+            $total += $sanPham['donGia'] * $sanPham['soLuong'];
+            
+            $this->chiTietNhapXuatRepository->create($data);
+        endforeach;
+
+        $this->nhapXuatRepository->update($id, ['tong' => $total]);
     }
 }

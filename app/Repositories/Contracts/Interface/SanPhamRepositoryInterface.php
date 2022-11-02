@@ -6,4 +6,7 @@ use App\Repositories\BaseRepositoryInterface;
 
 interface SanPhamRepositoryInterface extends BaseRepositoryInterface
 {
+    public function getListSuggest(?string $nhacc);
+    
+    public function getListSPFromRequest($data = []);
 }

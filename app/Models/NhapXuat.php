@@ -19,6 +19,9 @@ class NhapXuat extends Model
      * @var array
      */
     protected $fillable = [
+       'nhacungcap_id',
+       'user_id',
+       'type',
        'tong'
     ];
 }

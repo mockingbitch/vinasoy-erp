@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('nhacungcap_id');
             $table->foreign('nhacungcap_id')->references('id')->on('tbl_nhacungcap');
-            $table->unsignedBigInteger('nhanvien_id');
-            $table->foreign('nhanvien_id')->references('id')->on('tbl_nhanvien');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->string('tong')->nullable();
             $table->string('type');
             $table->timestamps();

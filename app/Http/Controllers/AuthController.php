@@ -113,4 +113,10 @@ class AuthController extends Controller
         ]);
     }
 
+    public function profile()
+    {
+        return view('admin.profile.profile', [
+            'breadcrumb' => 'profile'
+        ]);
+    }
 }
