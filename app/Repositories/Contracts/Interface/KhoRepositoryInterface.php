@@ -6,4 +6,7 @@ use App\Repositories\BaseRepositoryInterface;
 
 interface KhoRepositoryInterface extends BaseRepositoryInterface
 {
+    public function getByProduct();
+    
+    public function getDetail(int $id);
 }

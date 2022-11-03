@@ -3,27 +3,31 @@
 <input type="hidden" class="err-code" value="{{$errCode ?? ''}}"/>
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <h3 align="center" style="text-shadow: 1px 1px 2px grey;">Danh sách xuất nhập hàng</h3>
-        <a href="{{route('warehouse.nhapxuat.create')}}">
-            <button class="btn btn-primary" style="float: right;">Thêm mới</button>
-        </a>
+        <h3 align="center" style="text-shadow: 1px 1px 2px grey;">Chi tiết sản phẩm: {{$listChiTiet[0]->sanPham->tenSP}}</h3>
         <table class="table table-hover">
             <thead>
             <tr>
-                <th style="text-align: center"><b>SP ID</b></th>
-                <th style="text-align: center"><b>Sản phẩm</b></th>
-                <th style="text-align: center"><b>Số lượng trong kho</b></th>
+                <th style="text-align: center"><b>Ngày nhập</b></th>
+                <th style="text-align: center"><b>Số lượng</b></th>
+                <th style="text-align: center"><b>Ngày sản xuất</b></th>
+                <th style="text-align: center"><b>Hạn sử dụng</b></th>
+                <th style="text-align: center"><b>Đơn giá</b></th>
+                <th style="text-align: center"><b>Số lượng</b></th>
                 <th style="text-align: center"><b>Trạng thái</b></th>
                 {{-- <th><b>Xoá</b></th> --}}
             </tr>
             </thead>
             <tbody>
-            @foreach($listKho as $kho)
-            <tr class="tb-row" onclick="handleClickRow({{$kho->sanpham_id}})">
-                <td style="text-align: center">{{$kho->sanpham_id}}</td>
-                <td style="text-align: center">{{$kho->sanPham->tenSP}}</td>
-                <td style="text-align: center">{{$kho->soLuong}}</td>
-                <td style="text-align: center">{{$kho->soLuong >= 1 ? 'Còn hàng' : 'Hết hàng'}}</td>
+            @foreach($listChiTiet as $chiTiet)
+            <tr class="tb-row" >
+                <td style="text-align: center">{{$chiTiet->created_at}}</td>
+                <td style="text-align: center">{{$chiTiet->soLuong}}</td>
+                <td style="text-align: center">{{$chiTiet->nsx}}</td>
+                <td style="text-align: center">{{$chiTiet->hsd}}</td>
+                <td style="text-align: center">{{number_format($chiTiet->donGia)}}</td>
+                <td style="text-align: center">{{$chiTiet->soLuong >= 1 ? 'Còn hàng' : 'Hết hàng'}}</td>
+                <td style="text-align: center">{{$chiTiet->trangThai}}</td>
+
                 {{-- <td align="left">
                     <a class="btn btn-danger"
                         onclick="confirmDelete({{$sanPham->id}})">
@@ -39,7 +43,7 @@
 </div>
 <script>
     function handleClickRow(id) {
-        window.location.assign('kho/chitiet?id=' + id);
+        // window.location.assign('nhapxuat/chitiet?id=' + id);
     }
 
     function confirmDelete(id) {

@@ -51,13 +51,14 @@ class NhapXuatController extends Controller
      * @param ChiTietNhapXuatRepositoryInterface $chiTietNhapXuatRepository
      * @param NhaCungCapRepositoryInterface $nhaCungCapRepository
      * @param SanPhamRepositoryInterface $sanPhamRepository
+     * @param KhoRepositoryInterface $khoRepository
      */
     public function __construct(
         NhapXuatRepositoryInterface $nhapXuatRepository,
         ChiTietNhapXuatRepositoryInterface $chiTietNhapXuatRepository,
         NhaCungCapRepositoryInterface $nhaCungCapRepository,
         SanPhamRepositoryInterface $sanPhamRepository,
-        KhoRepository $khoRepository
+        KhoRepositoryInterface $khoRepository
         )
     {
         $this->nhapXuatRepository = $nhapXuatRepository;
@@ -128,6 +129,10 @@ class NhapXuatController extends Controller
                 'user_id' => $user->id,
                 'type' => (int) $request->type == 1 ? NhapXuatConstant::NHAPXUAT['xuat'] : NhapXuatConstant::NHAPXUAT['nhap']
             ];
+
+            if ($request->type != 0 && $this->khoRepository->checkNumberProduct($listSanPham) == false) :
+                return redirect()->route('warehouse.nhapxuat.create')->with('msg', 'Sản phẩm hết hàng');
+            endif;
 
             if (! $nhapXuat =  $this->nhapXuatRepository->create($data)) :
                 return redirect()

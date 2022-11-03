@@ -27,7 +27,8 @@ class AppServiceProvider extends ServiceProvider
             'DanhMuc',
             'SanPham',
             'NhapXuat',
-            'ChiTietNhapXuat'
+            'ChiTietNhapXuat',
+            'Kho'
         ];
 
         foreach ($models as $model) {

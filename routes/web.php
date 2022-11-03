@@ -129,7 +129,10 @@ Route::middleware(['checklogin'])->group(function() {
             Route::get('/nhapxuat/delete/query', [NhapXuatController::class, 'delete'])->name('warehouse.nhapxuat.delete');
             Route::get('/nhapxuat/chitiet', [ChiTietNhapXuatController::class, 'list'])->name('warehouse.nhapxuat.detail');
 
+            // Quan ly kho
             Route::get('/kho', [KhoController::class, 'list'])->name('warehouse.kho.list');
+            Route::get('/kho/delete/query', [KhoController::class, 'delete'])->name('warehouse.kho.delete');
+            Route::get('/kho/chitiet', [KhoController::class, 'detail'])->name('warehouse.kho.detail');
         });
     });
 });

@@ -34,7 +34,7 @@ rel = "stylesheet">
                             <input type="number" name="soLuong_` + i + `" class="form-control" id="inputSoQuyetDinh" aria-describedby="nameHelp">
                         </div>
                         <div class="form-group mt-4 col-4">
-                            <label for="inputGiaNhap">Giá nhập <small><small> @if ($errors->has('hsd'))<p class="text-error">*{{$errors->first('hsd')}}</p>@endif</label>
+                            <label for="inputGiaNhap">Giá <small><small> @if ($errors->has('hsd'))<p class="text-error">*{{$errors->first('hsd')}}</p>@endif</label>
                             <input type="number" name="donGia_` + i + `" class="form-control" id="inputGiaNhap" aria-describedby="nameHelp">
                         </div>
                     </div>
@@ -108,7 +108,7 @@ rel = "stylesheet">
                 <input type="number" name="soLuong_1" class="form-control" id="inputSoQuyetDinh" aria-describedby="nameHelp">
             </div>
             <div class="form-group mt-4 col-4">
-                <label for="inputGiaNhap">Giá nhập <small><small> @if ($errors->has('hsd'))<p class="text-error">*{{$errors->first('hsd')}}</p>@endif</label>
+                <label for="inputGiaNhap">Giá<small><small> @if ($errors->has('hsd'))<p class="text-error">*{{$errors->first('hsd')}}</p>@endif</label>
                 <input type="number" name="donGia_1" class="form-control" id="inputGiaNhap" aria-describedby="nameHelp">
             </div>
         </div>
