@@ -24,16 +24,30 @@ rel = "stylesheet">
             i += 1;
             getListSanPhamSuggest(url + query);
             $('.sanpham').append(
-                `<div class="row">
-                <div class="form-group mt-4 ui-widget col-6">
-                    <label for = "automplete-3">Tên sản phẩm @if ($errors->has('sanpham'))<p class="text-error">*{{$errors->first('sanpham')}}</p>@endif</label>
-                    <input type="text" name="sanPham_`+ i +`" class="form-control autocomplete" aria-describedby="nameHelp">
-                </div>
-                <div class="form-group mt-4 col-6">
-                    <label for="inputSoLuong">Số lượng @if ($errors->has('soLuong'))<p class="text-error">*{{$errors->first('soLuong')}}</p>@endif</label>
-                    <input type="number" name="soLuong_`+ i +`" class="form-control" aria-describedby="nameHelp">
-                </div>
-            </div>`
+                `   <div class="row">
+                        <div class="form-group mt-4 ui-widget col-4">
+                            <label for = "automplete-3">Tên sản phẩm @if ($errors->has('sanpham'))<p class="text-error">*{{$errors->first('sanpham')}}</p>@endif</label>
+                            <input type="text" name="sanPham_` + i + `" class="form-control autocomplete" id="automplete-3" aria-describedby="nameHelp">
+                        </div>
+                        <div class="form-group mt-4 col-4">
+                            <label for="inputSoLuong">Số lượng @if ($errors->has('soLuong'))<p class="text-error">*{{$errors->first('soLuong')}}</p>@endif</label>
+                            <input type="number" name="soLuong_` + i + `" class="form-control" id="inputSoQuyetDinh" aria-describedby="nameHelp">
+                        </div>
+                        <div class="form-group mt-4 col-4">
+                            <label for="inputGiaNhap">Giá nhập <small><small> @if ($errors->has('hsd'))<p class="text-error">*{{$errors->first('hsd')}}</p>@endif</label>
+                            <input type="number" name="donGia_` + i + `" class="form-control" id="inputGiaNhap" aria-describedby="nameHelp">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group mt-4 col-6">
+                            <label for="inputNsx">Ngày sản xuất @if ($errors->has('nsx'))<p class="text-error">*{{$errors->first('nsx')}}</p>@endif</label>
+                            <input type="date" name="nsx_` + i + `" class="form-control" id="inputNsx" aria-describedby="nameHelp">
+                        </div>
+                        <div class="form-group mt-4 col-6">
+                            <label for="inputHsd">Hạn sử dụng @if ($errors->has('hsd'))<p class="text-error">*{{$errors->first('hsd')}}</p>@endif</label>
+                            <input type="date" name="hsd_` + i + `" class="form-control" id="inputHsd" aria-describedby="nameHelp">
+                        </div>
+                    </div>`
             );
             $('#totalSP').val(i);
         })
@@ -69,6 +83,13 @@ rel = "stylesheet">
     <form class="mx-4 pt-4" method="post">
      @csrf
     <div class="form-group mt-4">
+        <label for="inputType">Kiểu @if ($errors->has('type'))<p class="text-error">*{{$errors->first('type')}}</p>@endif</label>
+        <select name="type" style="width:20%;height:50px;margin-left:17px " class="select form-select-lg mb-3" aria-label=".form-select-lg example">
+            <option value="0">Nhập</option>
+            <option value="1">Xuất</option>
+        </select>
+    </div>
+    <div class="form-group mt-4">
         <label for="inputNhaCC">Nhà cung cấp @if ($errors->has('nhacungcap_id'))<p class="text-error">*{{$errors->first('nhacungcap_id')}}</p>@endif</label>
         <select name="nhacungcap_id" style="width:20%;height:50px;margin-left:17px " class="select company form-select-lg mb-3" aria-label=".form-select-lg example">
             @foreach ($listNhaCC as $nhacc)
@@ -78,24 +99,32 @@ rel = "stylesheet">
     </div>
     <div class="sanpham">
         <div class="row">
-            <div class="form-group mt-4 ui-widget col-6">
+            <div class="form-group mt-4 ui-widget col-4">
                 <label for = "automplete-3">Tên sản phẩm @if ($errors->has('sanpham'))<p class="text-error">*{{$errors->first('sanpham')}}</p>@endif</label>
                 <input type="text" name="sanPham_1" class="form-control autocomplete" id="automplete-3" aria-describedby="nameHelp">
             </div>
-            <div class="form-group mt-4 col-6">
+            <div class="form-group mt-4 col-4">
                 <label for="inputSoLuong">Số lượng @if ($errors->has('soLuong'))<p class="text-error">*{{$errors->first('soLuong')}}</p>@endif</label>
                 <input type="number" name="soLuong_1" class="form-control" id="inputSoQuyetDinh" aria-describedby="nameHelp">
+            </div>
+            <div class="form-group mt-4 col-4">
+                <label for="inputGiaNhap">Giá nhập <small><small> @if ($errors->has('hsd'))<p class="text-error">*{{$errors->first('hsd')}}</p>@endif</label>
+                <input type="number" name="donGia_1" class="form-control" id="inputGiaNhap" aria-describedby="nameHelp">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group mt-4 col-6">
+                <label for="inputNsx">Ngày sản xuất @if ($errors->has('nsx'))<p class="text-error">*{{$errors->first('nsx')}}</p>@endif</label>
+                <input type="date" name="nsx_1" class="form-control" id="inputNsx" aria-describedby="nameHelp">
+            </div>
+            <div class="form-group mt-4 col-6">
+                <label for="inputHsd">Hạn sử dụng @if ($errors->has('hsd'))<p class="text-error">*{{$errors->first('hsd')}}</p>@endif</label>
+                <input type="date" name="hsd_1" class="form-control" id="inputHsd" aria-describedby="nameHelp">
             </div>
         </div>
     </div>
     <p class="btn btn-primary add-sanpham">Add San pham</p>
-    <div class="form-group mt-4">
-        <label for="inputType">Kiểu @if ($errors->has('type'))<p class="text-error">*{{$errors->first('type')}}</p>@endif</label>
-        <select name="type" style="width:20%;height:50px;margin-left:17px " class="select form-select-lg mb-3" aria-label=".form-select-lg example">
-            <option value="0">Nhập</option>
-            <option value="1">Xuất</option>
-        </select>
-    </div>
+   
 
     <a href="{{route('warehouse.nhapxuat.list')}}" class="btn btn-secondary add-sanpham">Trở về</a>
     <input type="hidden" name="totalSP" id="totalSP" />

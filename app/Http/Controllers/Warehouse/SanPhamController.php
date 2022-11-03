@@ -81,16 +81,16 @@ class SanPhamController extends Controller
      */
     public function list()
     {
-        try {
+        // try {
             return view('warehouse.sanpham.list', [
                 'errCode' => session()->get('sanPhamErrCode') ?? '',
                 'message' => session()->get('sanPhamMessage') ?? '',
                 'listSanPham' => $this->sanPhamRepository->getAll(),
                 'breadcrumb' => $this->breadcrumb
             ]);
-        } catch (\Throwable $th) {
-            return redirect()->route('404');
-        }
+        // } catch (\Throwable $th) {
+        //     return redirect()->route('404');
+        // }
     }
 
     /**

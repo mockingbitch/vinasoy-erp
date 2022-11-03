@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\SanPham;
+use App\Models\NhapXuat;
 
 class ChiTietNhapXuat extends Model
 {
@@ -24,4 +26,20 @@ class ChiTietNhapXuat extends Model
        'soLuong',
        'donGia'
     ];
+
+    /**
+     * @return void
+     */
+    public function sanPham()
+    {
+        return $this->belongsTo(SanPham::class, 'sanpham_id');
+    }
+
+    /**
+     * @return void
+     */
+    public function nhapXuat()
+    {
+        return $this->belongsTo(NhapXuat::class, 'nhapxuat_id');
+    }
 }

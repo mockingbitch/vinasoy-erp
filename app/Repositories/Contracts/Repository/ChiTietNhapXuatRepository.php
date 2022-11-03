@@ -12,4 +12,14 @@ class ChiTietNhapXuatRepository extends BaseRepository implements ChiTietNhapXua
     {
         return ChiTietNhapXuat::class;
     }
+
+    /**
+     * @param integer $id
+     * 
+     * @return object
+     */
+    public function findByNhapXuatId(int $id) : object
+    {
+        return $this->model->where('nhapxuat_id', $id)->where('deleted_at', '=', null)->get();
+    }
 }

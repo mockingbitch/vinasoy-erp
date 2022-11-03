@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('soLuong')->default(0);
             $table->string('nsx');
             $table->string('hsd');
+            $table->string('donGia');
             $table->string('trangThai')->nullable();
             $table->timestamps();
             $table->softDeletes();

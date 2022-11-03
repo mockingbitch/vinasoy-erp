@@ -37,10 +37,14 @@ class SanPhamRepository extends BaseRepository implements SanPhamRepositoryInter
     {
         $listSanPhamRequest = []; //list product from request with quantity
         $listSanPham = [];
+
         for ($i = 1; $i <= $data['totalSP']; $i++) {
             $listSanPhamRequest[] = [
                 'sanPham' => $data['sanPham_'.$i],
-                'soLuong' => $data['soLuong_'.$i]
+                'soLuong' => $data['soLuong_'.$i],
+                'nsx' => $data['nsx_'.$i],
+                'hsd' => $data['hsd_'.$i],
+                'donGia' => $data['donGia_'.$i]
             ];
         }
 
@@ -52,7 +56,9 @@ class SanPhamRepository extends BaseRepository implements SanPhamRepositoryInter
             $listSanPham[] = [
                 'sanpham_id' => (int) $arrStringName[0],
                 'soLuong' => (int) $sanPhamRQ['soLuong'],
-                'donGia' => (int) $sanPham->donGia
+                'nsx' => $sanPhamRQ['nsx'],
+                'hsd' => $sanPhamRQ['hsd'],
+                'donGia' => $sanPhamRQ['donGia']
             ];
         endforeach;
         

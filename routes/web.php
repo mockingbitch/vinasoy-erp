@@ -15,6 +15,10 @@ use App\Http\Controllers\Warehouse\NhaCungCapController;
 use App\Http\Controllers\Warehouse\DanhMucController;
 use App\Http\Controllers\Warehouse\SanPhamController;
 use App\Http\Controllers\Warehouse\NhapXuatController;
+use App\Http\Controllers\Warehouse\ChiTietNhapXuatController;
+use App\Http\Controllers\Warehouse\KhoController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -120,9 +124,12 @@ Route::middleware(['checklogin'])->group(function() {
             Route::get('/nhapxuat', [NhapXuatController::class, 'list'])->name('warehouse.nhapxuat.list');
             Route::get('/nhapxuat/new', [NhapXuatController::class, 'getCreateView'])->name('warehouse.nhapxuat.create');
             Route::post('/nhapxuat/new', [NhapXuatController::class, 'create']);
-            Route::get('/nhapxuat/{id}', [NhapXuatController::class, 'getUpdateView'])->name('warehouse.nhapxuat.update');
+            // Route::get('/nhapxuat/{id}', [NhapXuatController::class, 'getUpdateView'])->name('warehouse.nhapxuat.update');
             Route::post('/nhapxuat/{id}', [NhapXuatController::class, 'update']);
             Route::get('/nhapxuat/delete/query', [NhapXuatController::class, 'delete'])->name('warehouse.nhapxuat.delete');
+            Route::get('/nhapxuat/chitiet', [ChiTietNhapXuatController::class, 'list'])->name('warehouse.nhapxuat.detail');
+
+            Route::get('/kho', [KhoController::class, 'list'])->name('warehouse.kho.list');
         });
     });
 });

@@ -8,6 +8,7 @@ use App\Repositories\Contracts\Interface\NhapXuatRepositoryInterface;
 use App\Repositories\Contracts\Interface\ChiTietNhapXuatRepositoryInterface;
 use App\Repositories\Contracts\Interface\NhaCungCapRepositoryInterface;
 use App\Repositories\Contracts\Interface\SanPhamRepositoryInterface;
+use App\Repositories\Contracts\Interface\KhoRepositoryInterface;
 use App\Http\Requests\NhapXuatRequest;
 use Illuminate\View\View;
 use App\Constants\Constant;
@@ -24,6 +25,11 @@ class NhapXuatController extends Controller
      * @var nhapXuatRepository
      */
     protected $nhapXuatRepository;
+
+    /**
+     * @var khoRepository
+     */
+    protected $khoRepository;
 
     /**
      * @var chiTietNhapXuatRepository
@@ -50,13 +56,15 @@ class NhapXuatController extends Controller
         NhapXuatRepositoryInterface $nhapXuatRepository,
         ChiTietNhapXuatRepositoryInterface $chiTietNhapXuatRepository,
         NhaCungCapRepositoryInterface $nhaCungCapRepository,
-        SanPhamRepositoryInterface $sanPhamRepository
+        SanPhamRepositoryInterface $sanPhamRepository,
+        KhoRepository $khoRepository
         )
     {
         $this->nhapXuatRepository = $nhapXuatRepository;
         $this->chiTietNhapXuatRepository = $chiTietNhapXuatRepository;
         $this->nhaCungCapRepository = $nhaCungCapRepository;
         $this->sanPhamRepository = $sanPhamRepository;
+        $this->khoRepository = $khoRepository;
     }
 
     /**
@@ -111,7 +119,6 @@ class NhapXuatController extends Controller
     {
         // try {
             $listSanPham = $this->sanPhamRepository->getListSPFromRequest($request->toArray());
-            
             $user = auth()->guard('user')->user();
 
             if (! $listSanPham || null == $listSanPham || ! $user) return redirect()->route('warehouse.nhapxuat.create')->with('msg', 'Không tìm thấy sản phẩm'); 
@@ -160,12 +167,15 @@ class NhapXuatController extends Controller
                 'nhapxuat_id' => $id,
                 'sanpham_id' => $sanPham['sanpham_id'],
                 'soLuong' => $sanPham['soLuong'],
-                'donGia' => $sanPham['donGia']
+                'donGia' => $sanPham['donGia'],
+                'nsx' => $sanPham['nsx'],
+                'hsd' => $sanPham['hsd']
             ];
         
             $total += $sanPham['donGia'] * $sanPham['soLuong'];
             
             $this->chiTietNhapXuatRepository->create($data);
+            $this->khoRepository->create($data);
         endforeach;
 
         $this->nhapXuatRepository->update($id, ['tong' => $total]);
