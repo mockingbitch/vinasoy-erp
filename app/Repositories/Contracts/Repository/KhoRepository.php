@@ -32,7 +32,12 @@ class KhoRepository extends BaseRepository implements KhoRepositoryInterface
         return $this->model->where('sanpham_id', $id)->get();
     }
 
-    public function checkNumberProduct($listSanPham = [])
+    /**
+     * @param array $listSanPham
+     * 
+     * @return boolean
+     */
+    public function checkNumberProduct($listSanPham = []) : bool
     {
         foreach ($listSanPham as $sanPham) :
             $kho = $this->model
@@ -40,7 +45,10 @@ class KhoRepository extends BaseRepository implements KhoRepositoryInterface
                 ->where('sanpham_id', $sanPham['sanpham_id'])
                 ->groupBy('sanpham_id')
                 ->first();
-            dd($kho->soLuong);
+            
+            if($sanPham['soLuong'] > $kho->soLuong || null == $kho || ! $kho) return false;
         endforeach;
+
+        return true;
     }
 }
