@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Home\HomeController;
+use App\Http\Controllers\Home\CartController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Warehouse\WarehouseController;
 use App\Http\Controllers\Admin\NhanVienController;
@@ -136,3 +137,14 @@ Route::middleware(['checklogin'])->group(function() {
         });
     });
 });
+
+// Home
+Route::prefix('sanpham')->group(function () {
+    Route::get('/', [App\Http\Controllers\Home\SanPhamController::class, 'getListSanPham'])->name('home.sanpham.list');
+    Route::get('/{id}', [App\Http\Controllers\Home\SanPhamController::class, 'getChiTietSanPham'])->name('home.sanpham.chitiet');
+});
+Route::get('/giohang', [CartController::class, 'getViewGioHang'])->name('home.cart.list');
+Route::get('/thanhtoan', [CartController::class, 'getViewThanhToan'])->name('home.cart.checkout');
+Route::get('/themgiohang', [CartController::class, 'create'])->name('add-cart');
+Route::get('/capnhatgiohang', [CartController::class, 'update'])->name('update-cart');
+Route::get('/xoagiohang', [CartController::class, 'remove'])->name('remove-cart');

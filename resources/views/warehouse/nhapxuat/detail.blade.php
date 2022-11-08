@@ -46,7 +46,7 @@
                 button: "Đóng!",
                 });
         }
-        if (errCode && errCode == 'updated') {
+                                         if (errCode && errCode == 'updated') {
             swal({
                 title: "Cập nhật!",
                 text: "Cập nhật thành công!",

@@ -67,7 +67,7 @@
             }).then(function(isConfirm) {
             if (isConfirm) {
                 $.get("{{route('admin.nhanvien.delete')}}", {"id": id}, function(data) {
-                     $(".table").load("{{ route('admin.nhanvien.list') }} .table");
+                    $(".table").load("{{ route('admin.nhanvien.list') }} .table");
                 });
 
                 swal({
