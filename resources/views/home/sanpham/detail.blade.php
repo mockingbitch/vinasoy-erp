@@ -50,7 +50,7 @@
                     <i class="ion-ios-remove"></i>
                     </button>
                     </span>
-                <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
+                <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="1000">
                 <span class="input-group-btn ml-2">
                     <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
                     <i class="ion-ios-add"></i>
@@ -62,7 +62,7 @@
                 <p style="color: #000;">Còn 623 sản phẩm</p>
             </div>
         </div>
-        <p><a onclick="handleAddItemCart({{$sanPham->id}})" class="btn btn-black py-3 px-5">Thêm vào giỏ hàng</a></p>
+        <p><a onclick="handleAddItemCart({{$sanPham->id}})" class="btn btn-primary py-3 px-5">Thêm vào giỏ hàng</a></p>
             </div>
         </div>
     </div>
@@ -199,7 +199,8 @@
 </section>
 <script>
     function handleAddItemCart(id) {
-        $.get('{{route('add-cart')}}', {"id": id}, function (data) {
+        let soLuong = $('#quantity').val();
+        $.get('{{route('add-cart')}}', {"id": id, "soLuong": soLuong}, function (data) {
         if (data === 'true') {
         //   $(".cta-colored").load("{{route('home.sanpham.chitiet', ['id' => $sanPham->id])}} .cta-colored");
           swal("Thêm giỏ hàng", "Đã thêm vào giỏ hàng!", "success");

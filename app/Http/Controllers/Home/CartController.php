@@ -32,9 +32,24 @@ class CartController extends Controller
         ]);
     }
 
-    public function getViewThanhToan()
+    /**
+     * @return View
+     */
+    public function getViewThanhToan() : View
     {
-        return view('home.cart.checkout');
+        $listGioHang = session()->get('cart');
+        $subTotal = 0;
+
+        if (null !== $listGioHang && ! empty($listGioHang)) :
+            foreach ($listGioHang as $gioHang) :
+                $total = $gioHang['soLuong'] * $gioHang['gia'];
+                $subTotal += $total;
+            endforeach;
+        endif;
+
+        return view('home.cart.checkout', [
+            'subTotal' => $subTotal
+        ]);
     }
 
     
