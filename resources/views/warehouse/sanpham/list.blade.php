@@ -28,7 +28,7 @@
                 <td style="text-align: center">{{$sanPham->danhmuc->tenDanhMuc}}</td>
                 <td style="text-align: center">{{$sanPham->nhacungcap->tenNhaCC}}</td>
                 <td style="text-align: center">{{number_format($sanPham->donGia)}}</td>
-                <td style="text-align: center">{{$sanPham->img}}</td>
+                <td style="text-align: center"><img width="100px" src="{{asset('upload/images/sanpham/' . $sanPham->img)}}" alt=""></td>
                 <td style="text-align: center">{{$sanPham->trangThai == '1' ? 'Hiển thị' : 'Ẩn'}}</td>
                 <td align="left">
                     <a class="btn btn-danger"

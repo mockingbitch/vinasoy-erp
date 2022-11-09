@@ -26,7 +26,7 @@
             @foreach ($listSanPham as $sanPham)
                 <div class="col-md-6 col-lg-3 ftco-animate">
                     <div class="product">
-                        <a href="{{route('home.sanpham.chitiet', ['id' => $sanPham->id])}}" class="img-prod"><img class="img-fluid" src="{{asset('images/sanphamdefault.png')}}" alt="Colorlib Template">
+                        <a href="{{route('home.sanpham.chitiet', ['id' => $sanPham->id])}}" class="img-prod"><img class="img-fluid" src="{{asset('upload/images/sanpham'. {{$sanPham->img}})}}" alt="Colorlib Template">
                             {{-- <span class="status">30%</span> --}}
                             <div class="overlay"></div>
                         </a>

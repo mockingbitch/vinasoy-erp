@@ -89,6 +89,7 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::guard('user')->logout();
+        session()->forget('cart');
 
         return redirect()->route('login');
     }

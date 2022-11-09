@@ -146,7 +146,8 @@ Route::prefix('sanpham')->group(function () {
 });
 Route::get('/giohang', [CartController::class, 'getViewGioHang'])->name('home.cart.list');
 Route::get('/thanhtoan', [CartController::class, 'getViewThanhToan'])->name('home.cart.checkout');
-Route::post('/thanhtoan', [DonHangController::class, 'confirmOrder'])->name('home.confirm-order');
+Route::post('/thanhtoan', [DonHangController::class, 'confirmOrder']);
 Route::get('/themgiohang', [CartController::class, 'create'])->name('add-cart');
 Route::get('/capnhatgiohang', [CartController::class, 'update'])->name('update-cart');
 Route::get('/xoagiohang', [CartController::class, 'remove'])->name('remove-cart');
+Route::get('/thank', [HomeController::class, 'thanks'])->name('thanks');

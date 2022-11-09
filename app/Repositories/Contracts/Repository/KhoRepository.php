@@ -51,4 +51,29 @@ class KhoRepository extends BaseRepository implements KhoRepositoryInterface
 
         return true;
     }
+
+    /**
+     * @param integer|null $id
+     * 
+     * @return integer
+     */
+    public function countProduct(?int $id) : int
+    {
+        $kho = $this->model
+                ->select('sanpham_id', DB::raw('sum(soLuong) as soLuong'))
+                ->where('sanpham_id', $id)
+                ->groupBy('sanpham_id')
+                ->first();
+        
+        if (null !== $kho) return $kho->soLuong;
+
+        return 0;
+    }
+
+    public function updateQuantity($data)
+    {
+        $kho = $this->model
+                ->where('sanpham_id', $data['id'])
+                ->get();
+    }
 }

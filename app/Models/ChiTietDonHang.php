@@ -4,8 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class OrderDetail extends Model
+class ChiTietDonHang extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
+    /**
+     * @var string
+     */
+    protected $table = 'tbl_chitietdonhang';
+
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'donhang_id',
+        'sanpham_id',
+        'soLuong',
+        'donGia',
+        'tong'
+    ];
 }

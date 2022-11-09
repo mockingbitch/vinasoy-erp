@@ -41,4 +41,9 @@ class HomeController extends Controller
     {
         return view('404');
     }
+
+    public function thanks()
+    {
+        return view('home.thanks');
+    }
 }

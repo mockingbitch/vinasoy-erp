@@ -161,6 +161,7 @@ class NhapXuatController extends Controller
      * 
      * @param integer $id
      * @param array $listSanPham
+     * 
      * @return void
      */
     public function createChiTietNhapXuat(int $id, $listSanPham = [])

@@ -40,12 +40,13 @@
 					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
 						    <span class="text">+ 1235 2355 98</span>
 					    </div>
-					    <div class="col-md pr-4 d-flex topper align-items-center" style="display: {{isset($user) && null != $user ? 'block' : 'none'}} !important">
-					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
-						    <span class="text">youremail@email.com</span>
+					    <div class="col-md pr-4 d-flex topper align-items-center">
+					    	<div class="icon mr-2 d-flex justify-content-center align-items-center"><span class="icon-paper-plane"  style="display: {{null != Auth::guard('user')->user() ? 'block' : 'none'}} !important"></span></div>
+						    <span class="text"  style="display: {{null != Auth::guard('user')->user() ? 'block' : 'none'}} !important">{{Auth::guard('user')->user()->email ?? ''}}</span>
 					    </div>
 					    <div class="col-md-5 pr-4 d-flex topper align-items-center text-lg-right">
-						    <span class="text">Giao hàng nhanh chỉ trong 3-5 ngày &amp; Miễn phí hoàn trả</span>
+						    <span class="text"  style="display: {{null != Auth::guard('user')->user() ? 'block' : 'none'}} !important" onclick="handleLogOut()">Đăng xuất</span>
+						    <span class="text"  style="display: {{null == Auth::guard('user')->user() ? 'block' : 'none'}} !important" onclick="handleLogin()">Đăng nhập</span>
 					    </div>
 				    </div>
 			    </div>
@@ -211,7 +212,14 @@
         }
       });
     }
+
+    function handleLogOut() {
+      window.location.href = '{{route('logout')}}';
+    }
+
+    function handleLogin () {
+      window.location.href = '{{route('login')}}';
+    }
   </script>
-    
   </body>
 </html>
