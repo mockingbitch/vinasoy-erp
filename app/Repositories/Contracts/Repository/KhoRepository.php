@@ -72,8 +72,31 @@ class KhoRepository extends BaseRepository implements KhoRepositoryInterface
 
     public function updateQuantity($data)
     {
+        $listSortByHSD = [];
+        $now           = time();
+        $temp = [];
         $kho = $this->model
                 ->where('sanpham_id', $data['id'])
                 ->get();
+        //         dd($kho);
+        // if (! $kho || null !== $kho) :
+        //     return false;
+        // endif;
+
+        // Sort by hsd
+        foreach ($kho as $item) :
+            $item->hsd = strtotime($item->hsd);
+            // $date = date("Y/m/d H:i:s", $item->hsd);
+            // if ($) :
+
+            // endif;
+        endforeach;
+        $listKho = $kho->toArray();
+        usort($listKho, function ($a, $b) {
+            return $a['hsd'] < $b['hsd'];
+        });
+        dd($listKho);
+
+        dd($kho, $date);
     }
 }

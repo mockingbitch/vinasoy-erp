@@ -60,17 +60,17 @@ class DonHangController extends Controller
             $data['user_id'] = Auth::guard('user')->user()->id ?? null;
             $data['status'] = 1;
 
-            if (! $donHang = $this->donHangRepository->create($data)) :
-                return redirect()->back()->with('msg', 'Đã có lỗi xảy ra, vui lòng kiểm tra lại');
-            endif;
-            
-            if (! $this->createOrderDetail($donHang->id, $cart)) :
-                return redirect()->back()->with('msg', 'Đã có lỗi xảy ra, vui lòng kiểm tra lại');
-            endif;
+            // if (! $donHang = $this->donHangRepository->create($data)) :
+            //     return redirect()->back()->with('msg', 'Đã có lỗi xảy ra, vui lòng kiểm tra lại');
+            // endif;
+            $this->createOrderDetail(1, $cart);
+            // if (! $this->createOrderDetail($donHang->id, $cart)) :
+            //     return redirect()->back()->with('msg', 'Đã có lỗi xảy ra, vui lòng kiểm tra lại');
+            // endif;
             
             session()->forget('cart');
 
-            return redirect()->route('thanks');
+            // return redirect()->route('thanks');
         // } catch (\Throwable $th) {
         //     return redirect()->route('404');
         // }   
@@ -96,13 +96,13 @@ class DonHangController extends Controller
                     'donGia' => $cart['gia'],
                     'tong' => $total
                 ];
+                dd($this->khoRepository->updateQuantity($cart));
 
                 $sanPhamKho = $this->khoRepository->countProduct($cart['id']);
 
                 if (null !== $sanPhamKho && $cart['soLuong'] > $sanPhamKho) :
                     return false;
                 endif;
-
                 if (! $this->chiTietDonHangRepository->create($data) || ! $this->khoRepository->updateQuantity($cart)) :
                     return false;
                 endif;
