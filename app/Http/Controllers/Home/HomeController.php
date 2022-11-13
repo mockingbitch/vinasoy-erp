@@ -42,7 +42,10 @@ class HomeController extends Controller
         return view('404');
     }
 
-    public function thanks()
+    /**
+     * @return View
+     */
+    public function thanks() : View
     {
         return view('home.thanks');
     }

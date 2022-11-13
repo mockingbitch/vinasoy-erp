@@ -52,7 +52,11 @@ class CartController extends Controller
         ]);
     }
 
-    
+    /**
+     * @param Request $request
+     * 
+     * @return void
+     */
     public function create(Request $request)
     {
         try {
@@ -81,6 +85,11 @@ class CartController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * 
+     * @return void
+     */
     public function update(Request $request)
     {
         try {
@@ -100,6 +109,11 @@ class CartController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * 
+     * @return void
+     */
     public function remove(Request $request)
     {
         try {

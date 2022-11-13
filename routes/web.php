@@ -47,7 +47,7 @@ Route::middleware(['checklogin'])->group(function() {
     Route::middleware(['checkRoleAdmin'])->group(function() {
         Route::prefix('admin')->group(function() {
             Route::get('/', [AdminController::class, 'index'])->name('admin.home');
-            
+            Route::get('/search', [AdminController::class, 'search'])->name('admin.search');
             // Quan ly nhan vien
             Route::get('/nhanvien', [NhanVienController::class, 'list'])->name('admin.nhanvien.list');
             Route::get('/nhanvien/new', [NhanVienController::class, 'getCreateNhanVienView'])->name('admin.nhanvien.create');

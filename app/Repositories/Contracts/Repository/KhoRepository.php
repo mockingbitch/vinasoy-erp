@@ -78,25 +78,35 @@ class KhoRepository extends BaseRepository implements KhoRepositoryInterface
         $kho = $this->model
                 ->where('sanpham_id', $data['id'])
                 ->get();
-        //         dd($kho);
-        // if (! $kho || null !== $kho) :
-        //     return false;
-        // endif;
 
         // Sort by hsd
         foreach ($kho as $item) :
             $item->hsd = strtotime($item->hsd);
-            // $date = date("Y/m/d H:i:s", $item->hsd);
-            // if ($) :
-
-            // endif;
         endforeach;
+
         $listKho = $kho->toArray();
         usort($listKho, function ($a, $b) {
-            return $a['hsd'] < $b['hsd'];
+            return $a['hsd'] > $b['hsd'];
         });
-        dd($listKho);
+        
+        //update quantity
+        $left = $data['soLuong'];
+        $logItem = [];
+        foreach ($listKho as $item) :
+            if ($item['soLuong'] == 0) :
+                continue;
+            endif;
+            $logItem[] = $item['id'];
+            if ($item['soLuong'] < $left) :
+                $left = $left - $item['soLuong'];
+                $this->update($item['id'], ['trangThai' => '0', 'soLuong' => 0]);
+            else :
+                $left = $item['soLuong'] - $left;
+                $this->update($item['id'], ['trangThai' => $left == 0 ? '0' : '1', 'soLuong' => $left]);
+                break;
+            endif;
+        endforeach;
 
-        dd($kho, $date);
+        return $logItem;
     }
 }

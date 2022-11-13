@@ -261,8 +261,8 @@
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group">
-              <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-              <input type="text" class="form-control" placeholder="Type here...">
+              <span class="input-group-text text-body" onclick="handleSearch()"><i class="fas fa-search" aria-hidden="true"></i></span>
+              <input type="text" class="input-search form-control" placeholder="Type here...">
             </div>
           </div>
           <ul class="navbar-nav  justify-content-end">
@@ -676,6 +676,12 @@
 
     function handleLogout() {
       window.location.assign('/logout');
+    }
+
+    function handleSearch() {
+      let value = $('.input-search').val();
+      let breadcrumb = '{{$breadcrumb ?? ''}}';
+      $.get('{{route('admin.search')}}', {'value': value, 'breadcrumb': breadcrumb});
     }
   </script>
   <!-- Github buttons -->

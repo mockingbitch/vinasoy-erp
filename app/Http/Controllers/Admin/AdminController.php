@@ -23,8 +23,6 @@ class AdminController extends Controller
         ]);
     }
 
-    
-
     /**
      * @return Factory\View
      */
@@ -44,5 +42,10 @@ class AdminController extends Controller
         return view('admin.chucvu.create', [
             'breadcrumb' => 'chucvu'
         ]);
+    }
+
+    public function search(Request $request)
+    {
+        return 'asdasd';
     }
 }
