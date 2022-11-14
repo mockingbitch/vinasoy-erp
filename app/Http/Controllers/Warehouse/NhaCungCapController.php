@@ -31,9 +31,20 @@ class NhaCungCapController extends Controller
         $this->nhaccRepository = $nhaccRepository;
     }
 
-    public function list()
+    public function list(Request $request)
     {
         try {
+            $keysearch = $request->query('keysearch');
+
+            if (null !== $keysearch && $keysearch !== '') :
+                return view('warehouse.nhacungcap.list', [
+                    'errCode' => session()->get('nhaccErrCode') ?? '',
+                    'message' => session()->get('nhaccMessage') ?? '',
+                    'listNhaCC' => $this->nhaccRepository->search('tenNhaCC', $keysearch),
+                    'breadcrumb' => $this->breadcrumb
+                ]);
+            endif;
+
             $listNhaCC = $this->nhaccRepository->getAll();
 
             return view('warehouse.nhacungcap.list', [

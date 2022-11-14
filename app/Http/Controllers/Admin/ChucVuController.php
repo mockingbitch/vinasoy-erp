@@ -57,9 +57,20 @@ class ChucVuController extends Controller
     /**
      * @return void
      */
-    public function list()
+    public function list(Request $request)
     {
         try {
+            $keysearch = $request->query('keysearch');
+
+            if (null !== $keysearch && $keysearch !== '') :
+                return view('admin.chucvu.list', [
+                    'errCode' => session()->get('nhanVienErrCode') ?? '',
+                    'message' => session()->get('nhanVienMessage') ?? '',
+                    'listChucVu' => $this->chucVuRepository->search('tenChucVu', $keysearch),
+                    'breadcrumb' => $this->breadcrumb
+                ]);
+            endif;
+
             return view('admin.chucvu.list', [
                 'errCode' => session()->get('chucVuErrCode') ?? '',
                 'message' => session()->get('chucVuMessage') ?? '',

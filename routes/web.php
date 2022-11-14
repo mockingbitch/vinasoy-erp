@@ -96,6 +96,7 @@ Route::middleware(['checklogin'])->group(function() {
     Route::middleware(['checkRoleWareHouse'])->group(function() {
         Route::prefix('warehouse')->group(function() {
             Route::get('/', [WarehouseController::class, 'index'])->name('warehouse.home');
+            Route::get('/search', [WarehouseController::class, 'search'])->name('warehouse.search');
 
             // Quan ly nha cung cap
             Route::get('/nhacungcap', [NhaCungCapController::class, 'list'])->name('warehouse.nhacungcap.list');

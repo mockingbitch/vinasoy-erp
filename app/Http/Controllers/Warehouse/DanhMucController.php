@@ -58,9 +58,20 @@ class DanhMucController extends Controller
     /**
      * @return void
      */
-    public function list()
+    public function list(Request $request)
     {
         try {
+            $keysearch = $request->query('keysearch');
+
+            if (null !== $keysearch && $keysearch !== '') :
+                return view('warehouse.danhmuc.list', [
+                    'errCode' => session()->get('danhMucErrCode') ?? '',
+                    'message' => session()->get('danhMucMessage') ?? '',
+                    'listDanhMuc' => $this->danhMucRepository->search('tenDanhMuc', $keysearch),
+                    'breadcrumb' => $this->breadcrumb
+                ]);
+            endif;
+
             return view('warehouse.danhmuc.list', [
                 'errCode' => session()->get('danhMucErrCode') ?? '',
                 'message' => session()->get('danhMucMessage') ?? '',

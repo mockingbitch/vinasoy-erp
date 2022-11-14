@@ -128,9 +128,20 @@ class NhanVienController extends Controller
     /**
      * @return void
      */
-    public function list()
+    public function list(Request $request)
     {
         try {
+            $keysearch = $request->query('keysearch');
+
+            if (null !== $keysearch && $keysearch !== '') :
+                return view('admin.nhanvien.list', [
+                    'errCode' => session()->get('nhanVienErrCode') ?? '',
+                    'message' => session()->get('nhanVienMessage') ?? '',
+                    'listNhanVien' => $this->nhanVienRepository->search('hoTen', $keysearch),
+                    'breadcrumb' => $this->breadcrumb
+                ]);
+            endif;
+
             return view('admin.nhanvien.list', [
                 'errCode' => session()->get('nhanVienErrCode') ?? '',
                 'message' => session()->get('nhanVienMessage') ?? '',

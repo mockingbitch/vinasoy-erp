@@ -15,6 +15,9 @@ class PhongBanController extends Controller
      */
     protected $phongBanRepository;
 
+    /**
+     * @var breadcrumb
+     */
     protected $breadcrumb = 'phongban';
 
     /**
@@ -54,9 +57,20 @@ class PhongBanController extends Controller
     /**
      * @return void
      */
-    public function list()
+    public function list(Request $request)
     {
         try {
+            $keysearch = $request->query('keysearch');
+
+            if (null !== $keysearch && $keysearch !== '') :
+                return view('admin.phongban.list', [
+                    'errCode' => session()->get('nhanVienErrCode') ?? '',
+                    'message' => session()->get('nhanVienMessage') ?? '',
+                    'listPhongBan' => $this->phongBanRepository->search('tenPhong', $keysearch),
+                    'breadcrumb' => $this->breadcrumb
+                ]);
+            endif;
+
             return view('admin.phongban.list', [
                 'errCode' => session()->get('phongBanErrCode') ?? '',
                 'message' => session()->get('phongBanMessage') ?? '',

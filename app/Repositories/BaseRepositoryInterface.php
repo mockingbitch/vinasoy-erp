@@ -45,4 +45,6 @@ Interface BaseRepositoryInterface
      * @return mixed
      */
     public function paginate($int);
+
+    public function search(?string $key, ?string $value);
 }

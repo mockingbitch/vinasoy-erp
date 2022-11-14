@@ -681,7 +681,9 @@
     function handleSearch() {
       let value = $('.input-search').val();
       let breadcrumb = '{{$breadcrumb ?? ''}}';
-      $.get('{{route('admin.search')}}', {'value': value, 'breadcrumb': breadcrumb});
+      $.get('{{route('admin.search')}}', {'value': value, 'breadcrumb': breadcrumb}, function (data) {
+        window.location.assign(data);
+      });
     }
   </script>
   <!-- Github buttons -->

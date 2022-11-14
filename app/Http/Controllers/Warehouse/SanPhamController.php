@@ -95,9 +95,20 @@ class SanPhamController extends Controller
     /**
      * @return void
      */
-    public function list()
+    public function list(Request $request)
     {
         try {
+            $keysearch = $request->query('keysearch');
+
+            if (null !== $keysearch && $keysearch !== '') :
+                return view('warehouse.sanpham.list', [
+                    'errCode' => session()->get('sanPhamErrCode') ?? '',
+                    'message' => session()->get('sanPhamMessage') ?? '',
+                    'listSanPham' => $this->sanPhamRepository->search('tenSP', $keysearch),
+                    'breadcrumb' => $this->breadcrumb
+                ]);
+            endif;
+
             return view('warehouse.sanpham.list', [
                 'errCode' => session()->get('sanPhamErrCode') ?? '',
                 'message' => session()->get('sanPhamMessage') ?? '',
