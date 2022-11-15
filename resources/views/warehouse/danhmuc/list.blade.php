@@ -20,7 +20,11 @@
             @foreach($listDanhMuc as $danhMuc)
             <tr class="tb-row" onclick="handleClickRow({{$danhMuc->id}})">
                 <td style="text-align: center">{{$danhMuc->tenDanhMuc}}</td>
-                <td style="text-align: center">{{$danhMuc->trangThai == '1' ? 'Hiển thị' : 'Ẩn'}}</td>
+                <td style="text-align: center">
+                    <span class="badge badge-sm {{$danhMuc->trangThai == '1' ? 'bg-gradient-success' : 'bg-gradient-secondary'}}">
+                        {{$danhMuc->trangThai == '1' ? 'Hiển thị' : 'Ẩn'}}
+                    </span>
+                </td>
                 <td align="left" style="text-align: center">
                     <a class="btn btn-success" href="{{route('warehouse.danhmuc.update', ['id' => $danhMuc->id])}}">
                         <i class="fas fa-edit"></i>

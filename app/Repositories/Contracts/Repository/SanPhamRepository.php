@@ -5,6 +5,8 @@ namespace App\Repositories\Contracts\Repository;
 use App\Models\SanPham;
 use App\Repositories\Contracts\Interface\SanPhamRepositoryInterface;
 use App\Repositories\BaseRepository;
+use App\Models\Kho;
+use Illuminate\Support\Facades\DB;
 
 class SanPhamRepository extends BaseRepository implements SanPhamRepositoryInterface
 {
@@ -62,6 +64,26 @@ class SanPhamRepository extends BaseRepository implements SanPhamRepositoryInter
             ];
         endforeach;
         
+        return $listSanPham;
+    }
+
+    /**
+     * @return void
+     */
+    public function getProducts()
+    {
+        $listSanPham = $this->getAll();
+
+        foreach ($listSanPham as $sanPham) :
+            $kho = Kho::select('sanpham_id', DB::raw('sum(soLuong) as soLuong'))
+                ->where('sanpham_id', $sanPham->id)
+                ->groupBy('sanpham_id')
+                ->first();
+            
+            $sanPham->soLuong = 0;
+            if (null !== $kho) $sanPham->soLuong = $kho->soLuong;
+        endforeach;
+
         return $listSanPham;
     }
 }

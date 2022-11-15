@@ -147,8 +147,10 @@
             @foreach ($listSanPham as $sanPham)
                 <div class="col-md-6 col-lg-3 ftco-animate">
                     <div class="product">
-                        <a href="{{route('home.sanpham.chitiet', ['id' => $sanPham->id])}}" class="img-prod"><img class="img-fluid" src="{{asset('home/images/product-1.jpg')}}" alt="Colorlib Template">
-                            {{-- <span class="status">30%</span> --}}
+                        <a href="{{route('home.sanpham.chitiet', ['id' => $sanPham->id])}}" class="img-prod"><img class="img-fluid" src="{{asset(null !== $sanPham->img && $sanPham->img !== '' ? 'upload/images/sanpham/' . $sanPham->img : 'home/images/product-1.jpg')}}" alt="Colorlib Template">
+                            @if ($sanPham->soLuong == 0)
+                              <span class="status">Hết hàng</span>
+                            @endif
                             <div class="overlay"></div>
                         </a>
                         <div class="text py-3 pb-4 px-3 text-center">

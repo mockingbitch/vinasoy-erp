@@ -22,7 +22,11 @@
             <tr class="tb-row" onclick="handleClickRow({{$phongBan->id}})">
                 <td style="text-align: center">{{$phongBan->tenPhong}}</td>
                 <td style="text-align: center">{{$phongBan->ghiChu}}</td>
-                <td style="text-align: center">{{$phongBan->trangThai == '1' ? 'Hiển thị' : 'Ẩn'}}</td>
+                <td style="text-align: center">
+                    <span class="badge badge-sm {{$phongBan->trangThai == '1' ? 'bg-gradient-success' : 'bg-gradient-secondary'}}">
+                        {{$phongBan->trangThai == '1' ? 'Hiển thị' : 'Ẩn'}}
+                    </span>
+                </td>
                 <td align="left" style="text-align: center">
                     <a class="btn btn-success" href="{{route('admin.phongban.update', ['id' => $phongBan->id])}}">
                         <i class="fas fa-edit"></i>

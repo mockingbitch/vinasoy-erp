@@ -70,6 +70,11 @@ class KhoRepository extends BaseRepository implements KhoRepositoryInterface
         return 0;
     }
 
+    /**
+     * @param [type] $data
+     * 
+     * @return void
+     */
     public function updateQuantity($data)
     {
         $listSortByHSD = [];

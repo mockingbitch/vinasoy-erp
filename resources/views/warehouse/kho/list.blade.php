@@ -23,7 +23,11 @@
                 <td style="text-align: center">{{$kho->sanpham_id}}</td>
                 <td style="text-align: center">{{$kho->sanPham->tenSP}}</td>
                 <td style="text-align: center">{{$kho->soLuong}}</td>
-                <td style="text-align: center">{{$kho->soLuong >= 1 ? 'Còn hàng' : 'Hết hàng'}}</td>
+                <td style="text-align: center">
+                    <span class="badge badge-sm {{$kho->soLuong >= 1 ? 'bg-gradient-success' : 'bg-gradient-secondary'}}">
+                        {{$kho->soLuong >= 1 ? 'Còn hàng' : 'Hết hàng'}}
+                    </span>
+                </td>
                 {{-- <td align="left">
                     <a class="btn btn-danger"
                         onclick="confirmDelete({{$sanPham->id}})">

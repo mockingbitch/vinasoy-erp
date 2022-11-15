@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\NhanVien;
 
 class AuthController extends Controller
 {
@@ -116,8 +117,12 @@ class AuthController extends Controller
 
     public function profile()
     {
+        $nhanVien = NhanVien::where('user_id', '=', auth()->guard('user')->user()->id)->first();
+
         return view('admin.profile.profile', [
-            'breadcrumb' => 'profile'
+            'breadcrumb' => 'profile',
+            'user' => auth()->guard('user')->user(),
+            'nhanVien' => $nhanVien
         ]);
     }
 }

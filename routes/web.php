@@ -88,7 +88,7 @@ Route::middleware(['checklogin'])->group(function() {
             Route::get('/thuongphat/delete/query', [KyLuatKhenThuongController::class, 'deleteKlkt'])->name('admin.klkt.delete');
 
             //Profile
-            Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+            Route::get('/trangcanhan', [AuthController::class, 'profile'])->name('profile');
         });
     });
 

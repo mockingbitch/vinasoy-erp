@@ -59,10 +59,10 @@
             </div>
             <div class="w-100"></div>
             <div class="col-md-12">
-                <p style="color: #000;">Còn 623 sản phẩm</p>
+                <p style="color: #000;">Còn {{$soLuong}} sản phẩm</p>
             </div>
         </div>
-        <p><a onclick="handleAddItemCart({{$sanPham->id}})" class="btn btn-primary py-3 px-5">Thêm vào giỏ hàng</a></p>
+        <p><a onclick="handleAddItemCart({{$sanPham->id}})" class="btn btn-primary py-3 px-5">{{$status == 'outofstock' ? 'Hết hàng' : 'Thêm vào giỏ hàng'}}</a></p>
             </div>
         </div>
     </div>
@@ -199,15 +199,21 @@
 </section>
 <script>
     function handleAddItemCart(id) {
-        let soLuong = $('#quantity').val();
-        $.get('{{route('add-cart')}}', {"id": id, "soLuong": soLuong}, function (data) {
-        if (data === 'true') {
-        //   $(".cta-colored").load("{{route('home.sanpham.chitiet', ['id' => $sanPham->id])}} .cta-colored");
-          swal("Thêm giỏ hàng", "Đã thêm vào giỏ hàng!", "success");
+        let status = '{{$status}}';
+        console.log(status);
+        if (status !== 'outofstock') {
+            let soLuong = $('#quantity').val();
+            $.get('{{route('add-cart')}}', {"id": id, "soLuong": soLuong}, function (data) {
+                if (data === 'true') {
+                //   $(".cta-colored").load("{{route('home.sanpham.chitiet', ['id' => $sanPham->id])}} .cta-colored");
+                    swal("Thêm giỏ hàng", "Đã thêm vào giỏ hàng!", "success");
+                } else {
+                    swal("Thất bại", "Thêm thẩt bại!", "warning");
+                }
+            });
         } else {
-          swal("Thất bại", "Thêm thẩt bại!", "warning");
+            swal("Sản phẩm hết hàng!", "Thêm thất bại", "warning");
         }
-      });
     }
 </script>
 @endsection

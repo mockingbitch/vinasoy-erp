@@ -32,7 +32,11 @@
                 <td>{{$nhacc->fax}}</td>
                 <td>{{$nhacc->website}}</td>
                 <td>{{$nhacc->diaChi}}</td>
-                <td>{{$nhacc->trangThai == '1' ? 'Hiển thị' : 'Ẩn'}}</td>
+                <td style="text-align: center">
+                    <span class="badge badge-sm {{$nhacc->trangThai == '1' ? 'bg-gradient-success' : 'bg-gradient-secondary'}}">
+                        {{$nhacc->trangThai == '1' ? 'Hiển thị' : 'Ẩn'}}
+                    </span>
+                </td>
                 <td align="left">
                     <a class="btn btn-success" href="{{route('warehouse.nhacungcap.update', ['id' => $nhacc->id])}}">
                         <i class="fas fa-edit"></i>

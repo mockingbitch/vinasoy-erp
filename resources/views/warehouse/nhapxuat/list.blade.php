@@ -23,7 +23,11 @@
             <tr class="tb-row" onclick="handleClickRow({{$nhapXuat->id}})">
                 <td style="text-align: center">{{$nhapXuat->nhaCungCap->tenNhaCC}}</td>
                 <td style="text-align: center">{{$nhapXuat->user_id}}</td>
-                <td style="text-align: center">{{$nhapXuat->type}}</td>
+                <td style="text-align: center">
+                    <span class="badge badge-sm {{$nhapXuat->type == 'NHAP' ? 'bg-gradient-success' : 'bg-gradient-secondary'}}">
+                        {{$nhapXuat->type == 'NHAP' ? 'Nhập' : 'Xuất'}}
+                    </span>
+                </td>
                 <td style="text-align: center">{{number_format($nhapXuat->tong)}}</td>
                 <td style="text-align: center">{{$nhapXuat->created_at}}</td>
                 {{-- <td align="left">

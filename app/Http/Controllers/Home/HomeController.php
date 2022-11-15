@@ -30,7 +30,7 @@ class HomeController extends Controller
     {
         return view('home.home', [
             'user' => $user = Auth::user() ?? '',
-            'listSanPham' => $this->sanPhamRepository->getAll()
+            'listSanPham' => $this->sanPhamRepository->getProducts()
         ]);
     }
 
