@@ -90,6 +90,7 @@
                 <div class="card-header pb-0 text-left bg-transparent">
                   <h3 class="font-weight-bolder text-info text-gradient">Xin chào</h3>
                   <p class="mb-0">Nhập tài khoản và mật khẩu để tiếp tục</p>
+                  <p style="color: red">{{$msg ?? ''}}</p>
                 </div>
                 <div class="card-body">
                   <form role="form" method="post">

@@ -19,7 +19,7 @@ class CheckRoleAdmin
     {
         $user = Auth::guard('user')->user();
 
-        if ($user && $user->role == 'ADMIN' || $user->role == 'MANAGER' || $user->role == 'EMPLOYEE') {
+        if ($user && ($user->role == 'ADMIN' || $user->role == 'MANAGER' || $user->role == 'EMPLOYEE')) {
             return $next($request);
         } else {
             return redirect()->back();

@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\NhanVien;
-
+use Illuminate\Http\RedirectResponse;
+use Session;
 class AuthController extends Controller
 {
     /**
@@ -23,7 +24,9 @@ class AuthController extends Controller
             return redirect()->back();
         }
         
-        return view('auth.login');
+        return view('auth.login', [
+            'msg' => Session::get('msg') ?? null
+        ]);
     }
 
     public function login(Request $request)
