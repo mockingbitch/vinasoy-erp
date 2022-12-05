@@ -34,7 +34,7 @@ class NhanVienRequest extends FormRequest
             'ngoaiNgu' => 'max:255',
             'stk' => 'numeric',
             'nganHang' => 'max:255',
-            'email' => 'required|email|max:50',
+            'email' => 'required|email|max:50|unique:App\Models\User,email',
             'password' => 'required',
             're-password' => 'required',
             'role' => 'required|numeric'
@@ -67,6 +67,7 @@ class NhanVienRequest extends FormRequest
             'email.required' => 'Email không được bỏ trống',
             'email.email' => 'Vui lòng nhập định dạng email',
             'email.max' => 'Email không được vượt quá 50 ký tự',
+            'email.unique' => 'Email đã tồn tại',
             'password.required' => 'Mật khẩu không được bỏ trống',
             're-password.required' => 'Xác nhận mật khẩu',
             'role.required' => 'Vai trò không được bỏ trống',

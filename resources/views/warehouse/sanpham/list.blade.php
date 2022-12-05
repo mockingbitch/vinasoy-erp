@@ -45,10 +45,10 @@
 </div>
 <script>
     function handleClickRow(id) {
-        // window.location.assign('/nhanvien/detail/' + id);
+        window.location.assign('sanpham/' + id);
     }
 
-    function confirmDelete(id) {
+    function confirmDelete(id, e) {
         swal({
             title: "Bạn có muốn xoá mục này?",
             text: "Dữ liệu xoá sẽ không thể khôi phục!",
@@ -65,9 +65,9 @@
                 });
 
                 swal({
-                title: 'Đã xoá!',
-                text: 'Xoá thành công mục này!',
-                icon: 'success'
+                    title: 'Đã xoá!',
+                    text: 'Xoá thành công mục này!',
+                    icon: 'success'
                 }).then(function() {
                 });
             } else {

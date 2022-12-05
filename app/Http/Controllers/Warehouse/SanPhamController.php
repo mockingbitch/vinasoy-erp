@@ -138,11 +138,11 @@ class SanPhamController extends Controller
      * 
      * @return void
      */
-    public function getUpdateSanPhamView($id)
+    public function getUpdateView($id)
     {
         try {
             $sanPham     = $this->sanPhamRepository->find((int) $id);
-            $listDanhmuc = $this->danhMucRepository->getAll();
+            $listDanhMuc = $this->danhMucRepository->getAll();
             $listNhaCC   = $this->nhaCungCapRepository->getAll();
 
             if (! $sanPham || null == $sanPham) :
@@ -151,7 +151,7 @@ class SanPhamController extends Controller
 
             return view('warehouse.sanpham.update', [
                 'sanPham' => $sanPham,
-                'listDanhmuc' => $listDanhmuc,
+                'listDanhMuc' => $listDanhMuc,
                 'listNhaCC' => $listNhaCC,
                 'breadcrumb' => $this->breadcrumb
             ]);
@@ -166,7 +166,7 @@ class SanPhamController extends Controller
      * 
      * @return void
      */
-    public function updateSanPham($id, SanPhamRequest $request)
+    public function update($id, SanPhamRequest $request)
     {
         try {
             if (! $this->danhMucRepository->find((int) $request->danhmuc_id)) return redirect()->route('warehouse.sanpham.update')->with('msg', 'Danh mục không tồn tại');

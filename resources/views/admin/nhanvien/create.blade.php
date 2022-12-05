@@ -6,7 +6,7 @@
      @csrf
      <div class="form-group mt-4">
         <label for="inputHoTen">Họ và tên @if ($errors->has('hoTen'))<p class="text-error">*{{$errors->first('hoTen')}}</p>@endif</label>
-        <input type="text" name="hoTen" class="form-control" id="inputHoTen" aria-describedby="nameHelp" value="">
+        <input type="text" name="hoTen" class="form-control" id="inputHoTen" aria-describedby="nameHelp" value="{{Request::old('hoTen')}}">
     </div>
     <div class="form-group">
         <label for="inputGioiTinh">Giới tính @if ($errors->has('gioiTinh'))<p class="text-error">*{{$errors->first('gioiTinh')}}</p>@endif</label>
@@ -22,37 +22,37 @@
         <div class="col-6">
             <div class="form-group">
                 <label for="inputNgaySinh">Ngày sinh @if ($errors->has('ngaySinh'))<p class="text-error">*{{$errors->first('ngaySinh')}}</p>@endif</label>
-                <input type="date" class="form-control" name="ngaySinh" id="inputNgaySinh" value="">
+                <input type="date" class="form-control" name="ngaySinh" id="inputNgaySinh" value="{{Request::old('ngaySinh')}}">
             </div>
         </div>
         <div class="col-6">
             <div class="form-group">
                 <label for="inputThuongTru">Thường trú @if ($errors->has('thuongTru'))<p class="text-error">*{{$errors->first('thuongTru')}}</p>@endif</label>
-                <input type="text" class="form-control" name="thuongTru" id="inputThuongTru" value="">
+                <input type="text" class="form-control" name="thuongTru" id="inputThuongTru" value="{{Request::old('thuongTru')}}">
             </div>
         </div>
         <div class="col-6">
             <div class="form-group">
                 <label for="inputTamTru">Tạm trú @if ($errors->has('tamTru'))<p class="text-error">*{{$errors->first('tamTru')}}</p>@endif</label>
-                <input type="text" class="form-control" name="tamTru" id="inputTamTru" value="">
+                <input type="text" class="form-control" name="tamTru" id="inputTamTru" value="{{Request::old('tamTru')}}">
             </div>
         </div>
         <div class="col-6">
             <div class="form-group">
                 <label for="inputCCCD">Căn cước công dân @if ($errors->has('cccd'))<p class="text-error">*{{$errors->first('cccd')}}</p>@endif</label>
-                <input type="text" class="form-control" name="cccd" id="inputCCCD" value="">
+                <input type="text" class="form-control" name="cccd" id="inputCCCD" value="{{Request::old('cccd')}}">
             </div>
         </div>
         <div class="col-6">
             <div class="form-group">
                 <label for="inputHocVan">Học vấn @if ($errors->has('hocVan'))<p class="text-error">*{{$errors->first('hocVan')}}</p>@endif</label>
-                <input type="text" class="form-control" name="hocVan" id="inputHocVan" value="">
+                <input type="text" class="form-control" name="hocVan" id="inputHocVan" value="{{Request::old('hocVan')}}">
             </div>
         </div>
         <div class="col-6">
             <div class="form-group">
                 <label for="inputNgoaiNgu">Ngoại ngữ @if ($errors->has('ngoaiNgu'))<p class="text-error">*{{$errors->first('ngoaiNgu')}}</p>@endif</label>
-                <input type="text" class="form-control" name="ngoaiNgu" id="inputNgoaiNgu" value="">
+                <input type="text" class="form-control" name="ngoaiNgu" id="inputNgoaiNgu" value="{{Request::old('nguoiNgu')}}">
             </div>
         </div>
         <div class="col-6">
@@ -60,7 +60,7 @@
                 <label for="inputPhongBan">Phòng ban @if ($errors->has('maphong_id'))<p class="text-error">*{{$errors->first('maphong_id')}}</p>@endif</label>
                 <select name="maphong_id" style="width: 20%; height: 50px; margin-left: 17px " class="select form-select-lg mb-3" aria-label=".form-select-lg example">
                     @foreach ($listPhongBan as $phongBan)
-                    <option value="{{$phongBan->id}}">{{$phongBan->tenPhong}}</option>
+                    <option value="{{$phongBan->id}}" {{Request::old('maphong_id') == $phongBan->id ? 'selected' : ''}}>{{$phongBan->tenPhong}}</option>
                     @endforeach
                 </select>
             </div>
@@ -70,7 +70,7 @@
                 <label for="inputChucVu">Chức vụ @if ($errors->has('chucvu_id'))<p class="text-error">*{{$errors->first('chucvu_id')}}</p>@endif</label>
                 <select name="chucvu_id" style="width:20%;height:50px;margin-left:17px " class="select form-select-lg mb-3" aria-label=".form-select-lg example">
                     @foreach ($listChucVu as $chucVu)
-                    <option value="{{$chucVu->id}}">{{$chucVu->tenChucVu}}</option>
+                    <option value="{{$chucVu->id}}" {{Request::old('chucvu_id') == $chucVu->id ? 'selected' : ''}}>{{$chucVu->tenChucVu}}</option>
                     @endforeach
                 </select>
             </div>
@@ -78,13 +78,13 @@
         <div class="col-6">
             <div class="form-group">
                 <label for="inputNganHang">Ngân hàng @if ($errors->has('nganHang'))<p class="text-error">*{{$errors->first('nganHang')}}</p>@endif</label>
-                <input type="text" class="form-control" name="nganHang" id="inputNganHang" value="">
+                <input type="text" class="form-control" name="nganHang" id="inputNganHang" value="{{Request::old('nganHang')}}">
             </div>
         </div>
         <div class="col-6">
             <div class="form-group">
                 <label for="inputSTK">Số tài khoản @if ($errors->has('stk'))<p class="text-error">*{{$errors->first('stk')}}</p>@endif</label>
-                <input type="text" class="form-control" name="stk" id="inputSTK" value="">
+                <input type="text" class="form-control" name="stk" id="inputSTK" value="{{Request::old('stk')}}">
             </div>
         </div>
     </div>
@@ -93,7 +93,7 @@
         <div class="col-6">
             <div class="form-group">
                 <label for="inputEmail">Email @if ($errors->has('email'))<p class="text-error">*{{$errors->first('email')}}</p>@endif</label>
-                <input type="email" class="form-control" name="email" id="inputEmail" value="">
+                <input type="email" class="form-control" name="email" id="inputEmail" value="{{Request::old('email')}}">
             </div>
         </div>
         <div class="col-6">

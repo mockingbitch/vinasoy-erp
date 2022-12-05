@@ -5,6 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
+    <link rel="apple-touch-icon" sizes="76x76" href="{{asset('images/favicon.ico')}}">
+    <link rel="icon" type="image/png" href="{{asset('images/favicon.ico')}}">
+
     <link href="{{asset('home/css/google-font1.css')}}" rel="stylesheet">
     <link href="{{asset('home/css/google-font2.css')}}" rel="stylesheet">
     <link href="{{asset('home/css/google-font3.css')}}" rel="stylesheet">

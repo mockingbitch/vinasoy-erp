@@ -25,6 +25,6 @@ class NhanVienRepository extends BaseRepository implements NhanVienRepositoryInt
             $arrSugest[] = $nhanVien->id . '-' . $nhanVien->hoTen;
         endforeach;
 
-        return $arrSugest;
+        return $arrSuggest;
     }
 }

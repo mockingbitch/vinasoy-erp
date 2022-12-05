@@ -6,16 +6,15 @@
      @csrf
     <div class="form-group mt-4">
         <label for="inputTenDanhMuc">Tên danh mục @if ($errors->has('tenDanhMuc'))<p class="text-error">*{{$errors->first('tenDanhMuc')}}</p>@endif</label>
-        <input type="text" name="tenDanhMuc" class="form-control" id="inputTenDanhMuc" aria-describedby="nameHelp" value="{{$data['tenDanhMuc'] ?? ''}}">
+        <input type="text" name="tenDanhMuc" class="form-control" id="inputTenDanhMuc" aria-describedby="nameHelp" value="{{Request::old('tenDanhMuc')}}">
     </div> 
     <div class="form-group mt-4">
         <label for="inputMoTa">Mô tả @if ($errors->has('moTa'))<p class="text-error">*{{$errors->first('moTa')}}</p>@endif</label>
-        <input type="text" name="moTa" class="form-control" id="inputMoTa" aria-describedby="nameHelp" value="{{$data['moTa'] ?? ''}}">
+        <input type="text" name="moTa" class="form-control" id="inputMoTa" aria-describedby="nameHelp" value="{{Request::old('moTa')}}">
     </div>
     <div class="form-group mt-4">
         <label for="inputTrangThai">Trạng thái @if ($errors->has('trangThai'))<p class="text-error">*{{$errors->first('trangThai')}}</p>@endif</label>
         <select name="trangThai" style="width:20%;height:50px;margin-left:17px " class="select form-select-lg mb-3" aria-label=".form-select-lg example">
-            <option>-----------Trạng thái---------</option>
             <option value="1">Hiển thị</option>
             <option value="0">Ẩn</option>
         </select>
